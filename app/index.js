@@ -5,9 +5,13 @@ const slideClassName = 'gallery-slide';
 class Gallery {
     constructor(containerNode, options = {}) {
         this.containerNode = document.querySelector(containerNode);
+        this.initialLineNodePosition = 0;
         this.handleHtml = this.handleHtml.bind(this);
         this.setSize = this.setSize.bind(this);
         this.setEvents = this.setEvents.bind(this);
+        this.startDrag = this.startDrag.bind(this);
+        this.dragging = this.dragging.bind(this);
+        this.stopDrag = this.stopDrag.bind(this);
         this.handleHtml();
         this.setSize();
         this.setEvents();
@@ -23,7 +27,8 @@ class Gallery {
         this.slideNodes = Array.from(this.lineNode.children).map(node => {
             return wrapElementIntoDiv(slideClassName, node);
         });
-        console.log(this.slideNodes)
+        const pictures = Array.from(this.containerNode.querySelectorAll('img'));
+        pictures.forEach(e => e.setAttribute('draggable', 'false'));
     }
 
     setSize() {
@@ -37,21 +42,35 @@ class Gallery {
     setEvents() {
         window.addEventListener('resize', e => this.setSize());
         this.lineNode.addEventListener('pointerdown', e => this.startDrag());
+
     }
 
     startDrag() {
-        this.clickPos = event.clientX;
-        console.log(this.clickPos);
-        window.addEventListener('pointermove', e => this.dragging());
+        this.clickPosition = event.clientX;
+        window.addEventListener('pointermove', this.dragging);
+        window.addEventListener('pointerup', this.stopDrag);
+        document.body.style.cursor = 'grab';
+    }
+
+    dragging() {
+        this.shift = event.clientX - this.clickPosition;
+        this.lineNode.style.transform = `translateX(${this.shift + this.initialLineNodePosition}px)`;
+    }
+
+    stopDrag() {
+        this.initialLineNodePosition += this.shift;
+        window.removeEventListener('pointermove', this.dragging);
+        window.removeEventListener('pointerup', this.stopDrag);
+        document.body.style.removeProperty('cursor');
     }
 }
 
 const firstSlider = new Gallery('#landscape-slider');
 
 function wrapElementIntoDiv(divClass, el) {
-    const slideNode = document.createElement('div');
-    slideNode.className = divClass;
-    el.parentNode.insertBefore(slideNode, el);
-    slideNode.appendChild(el);
-    return slideNode
+    const wrapper = document.createElement('div');
+    wrapper.className = divClass;
+    el.parentNode.insertBefore(wrapper, el);
+    wrapper.appendChild(el);
+    return wrapper
 }

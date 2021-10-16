@@ -10,12 +10,6 @@ h1 {
     margin-bottom: 15px;
 }
 
-.container {
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 15px;
-}
-
 .wrapper {
     width: 100%;
     overflow-x: hidden;
@@ -43,7 +37,6 @@ h1 {
 .slider {
     & .gallery-line {
         display: flex;
-        cursor: pointer;
     }
 }
 
@@ -54,34 +47,22 @@ h1 {
 
 
 
-
+/* 
 @media(min-width: 576px) {
-    .container {
-        max-width: 540px;
-    }
+
 }
 @media(min-width: 768px) {
-    .container {
-        max-width: 720px;
-    }
+
 }
 @media(min-width: 992px) {
-    .container {
-        max-width: 960px;
-    }
+
 }
 @media(min-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
+
 }
 @media(min-width: 1400px) {
-    .container {
-        max-width: 1320px;
-    }
+
 }
 @media(min-width: 1920px) {
-    .container {
-        max-width: 1810px;
-    }
-}
+
+} */
