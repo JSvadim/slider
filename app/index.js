@@ -44,9 +44,8 @@ class Gallery {
     }
 
     setEvents() {
-        window.addEventListener('resize', e => this.setSize());
+        window.addEventListener('resize', debounce(this.setSize, 400));
         this.lineNode.addEventListener('pointerdown', e => this.startDrag());
-
     }
 
     startDrag() {
@@ -64,7 +63,6 @@ class Gallery {
             return this.lineNode.style.transform = `translateX(${(this.shift / 5) + this.initialLineNodePosition}px)`;
         }
         this.lineNode.style.transform = `translateX(${this.currentLineNodePosition}px)`;
-        console.log(this.shift)
     }
 
     stopDrag() {
@@ -126,6 +124,7 @@ class Gallery {
             this.lineNode.style.removeProperty('transition');
         }, 500); 
     }
+
 }
 
 const firstSlider = new Gallery('#landscape-slider');
@@ -136,4 +135,12 @@ function wrapElementIntoDiv(divClass, el) {
     el.parentNode.insertBefore(wrapper, el);
     wrapper.appendChild(el);
     return wrapper
+}
+
+function debounce(clb, delay) {
+    let timer;
+    return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(clb, delay, args);
+    }
 }
