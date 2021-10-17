@@ -35,8 +35,10 @@ h1 {
 }
 
 .slider {
+
     & .gallery-line {
         display: flex;
+        user-select: none;
     }
 }
 

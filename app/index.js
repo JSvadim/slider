@@ -1,15 +1,17 @@
 const lineNodeClassName = 'gallery-line';
 const slideClassName = 'gallery-slide';
+const galleryClassName = 'gallery';
 
 
 class Gallery {
 
     constructor(containerNode, options = {}) {
-        this.containerNode = document.querySelector(containerNode);
-        this.currentSlide = 0;
         this.settings = {
-            spaceBetweenSlides: options.spaceBetweenSlides || 0
+            spaceBetweenSlides: options.spaceBetweenSlides || 0,
+            initialSlide: options.initialSlide || 0,
         }
+        this.containerNode = document.querySelector(containerNode);
+        this.currentSlide = this.settings.initialSlide;
         this.initialLineNodePosition = 0;
         this.handleHtml = this.handleHtml.bind(this);
         this.setSize = this.setSize.bind(this);
@@ -29,6 +31,7 @@ class Gallery {
                 ${this.containerNode.innerHTML}
             </div>
         `
+        this.containerNode.classList.add(galleryClassName);
         this.lineNode = this.containerNode.querySelector(`.${lineNodeClassName}`);
         this.slideNodes = Array.from(this.lineNode.children).map(node => {
             return wrapElementIntoDiv(slideClassName, node);
@@ -46,6 +49,9 @@ class Gallery {
         })
         this.lineNode.style.width = ((this.containerSizes.width * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
         this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - (this.containerSizes.width + this.settings.spaceBetweenSlides)
+        const lineNodePosition = this.currentSlide * (this.containerSizes.width + this.settings.spaceBetweenSlides);
+        this.lineNode.style.transform = `translateX(${-lineNodePosition}px)`
+        this.initialLineNodePosition = -lineNodePosition;
     }
 
     setEvents() {
@@ -112,6 +118,7 @@ class Gallery {
 
     changeSlide(slideToChangeWith) {
         this.lineNode.style.transition = "all 0.5s";
+        this.lineNode.style.pointerEvents = 'none';
         if(slideToChangeWith === 'next') {
             this.currentSlide += 1;
             const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
@@ -119,6 +126,7 @@ class Gallery {
             this.lineNode.style.transform = `translateX(${newPos}px)`;
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
+                this.lineNode.style.removeProperty('pointer-events');
             }, 500); 
         }
         this.currentSlide -= 1;
@@ -127,12 +135,18 @@ class Gallery {
         this.lineNode.style.transform = `translateX(${newPos}px)`;
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
+            this.lineNode.style.removeProperty('pointer-events');
         }, 500); 
     }
 
 }
 
-const firstSlider = new Gallery('#landscape-slider', {spaceBetweenSlides: 50});
+const firstSlider = new Gallery('#landscape-slider',
+    {
+        spaceBetweenSlides: 50,
+        initialSlide: 2,
+    }
+ );
 
 function wrapElementIntoDiv(divClass, el) {
     const wrapper = document.createElement('div');
