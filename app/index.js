@@ -3,9 +3,13 @@ const slideClassName = 'gallery-slide';
 
 
 class Gallery {
+
     constructor(containerNode, options = {}) {
         this.containerNode = document.querySelector(containerNode);
         this.currentSlide = 0;
+        this.settings = {
+            spaceBetweenSlides: options.spaceBetweenSlides || 0
+        }
         this.initialLineNodePosition = 0;
         this.handleHtml = this.handleHtml.bind(this);
         this.setSize = this.setSize.bind(this);
@@ -29,6 +33,7 @@ class Gallery {
         this.slideNodes = Array.from(this.lineNode.children).map(node => {
             return wrapElementIntoDiv(slideClassName, node);
         });
+        this.slideNodes.forEach(node => node.style.marginRight = `${this.settings.spaceBetweenSlides}px`)
         const pictures = Array.from(this.containerNode.querySelectorAll('img'));
         pictures.forEach(e => e.setAttribute('draggable', 'false'));
     }
@@ -39,8 +44,8 @@ class Gallery {
         this.slideNodes.forEach(slide => {
             return slide.style.width = this.containerSizes.width + 'px'
         })
-        this.lineNode.style.width = this.containerSizes.width * this.size + 'px'
-        this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - this.containerSizes.width
+        this.lineNode.style.width = ((this.containerSizes.width * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
+        this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - (this.containerSizes.width + this.settings.spaceBetweenSlides)
     }
 
     setEvents() {
@@ -109,7 +114,7 @@ class Gallery {
         this.lineNode.style.transition = "all 0.5s";
         if(slideToChangeWith === 'next') {
             this.currentSlide += 1;
-            const newPos = -this.containerSizes.width * this.currentSlide;
+            const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
             this.initialLineNodePosition = newPos;
             this.lineNode.style.transform = `translateX(${newPos}px)`;
             return setTimeout(() => {
@@ -117,7 +122,7 @@ class Gallery {
             }, 500); 
         }
         this.currentSlide -= 1;
-        const newPos = -this.containerSizes.width * this.currentSlide;
+        const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
         this.lineNode.style.transform = `translateX(${newPos}px)`;
         setTimeout(() => {
@@ -127,7 +132,7 @@ class Gallery {
 
 }
 
-const firstSlider = new Gallery('#landscape-slider');
+const firstSlider = new Gallery('#landscape-slider', {spaceBetweenSlides: 50});
 
 function wrapElementIntoDiv(divClass, el) {
     const wrapper = document.createElement('div');
