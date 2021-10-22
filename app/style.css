@@ -105,6 +105,10 @@ h1 {
   padding: 15px 0 0 0;
 }
 
+.gallery-line.dragging {
+  cursor: grab;
+}
+
 .main-title {
   text-align: center;
 }
@@ -119,12 +123,57 @@ h1 {
 .slider__item-picture {
   width: 100%;
   height: 100%;
+  user-select: none;
   object-fit: cover;
 }
 
+.slider {
+  position: relative;
+  padding: 0 0 40px 0;
+}
 .slider .gallery-line {
   display: flex;
   user-select: none;
+}
+.slider .gallery-dots {
+  position: absolute;
+  bottom: 7.5px;
+  left: 50%;
+  display: flex;
+  transform: translateX(-50%);
+}
+.slider .gallery-dot {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+.slider .gallery-dot::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: lightblue;
+}
+.slider .gallery-dot:last-child {
+  margin-right: 0;
+}
+.slider .gallery-dot:hover {
+  cursor: pointer;
+}
+.slider .gallery-dot:hover::before {
+  background-color: #80cae2;
+}
+.slider .gallery-dot.gallery-dot-active {
+  pointer-events: none;
+}
+.slider .gallery-dot.gallery-dot-active::before {
+  background-color: #53b5d6;
 }
 
 /* 
