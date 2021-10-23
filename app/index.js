@@ -1,9 +1,17 @@
 const lineNodeClassName = 'gallery-line';
 const slideClassName = 'gallery-slide';
 const galleryClassName = 'gallery';
+
 const dotsContainerName = 'gallery-dots';
 const dotName = 'gallery-dot';
 const activeDotName = 'gallery-dot-active';
+
+const arrowsContainerName = 'gallery-arrows';
+const arrowName = 'gallery-arrow';
+const prevArrowName = 'gallery-arrow-prev';
+const nextArrowName = 'gallery-arrow-next';
+const disabledArrowName = 'gallery-arrow-disabled';
+
 
 class Gallery {
 
@@ -11,7 +19,8 @@ class Gallery {
         this.settings = {
             spaceBetweenSlides: options.spaceBetweenSlides || 0,
             initialSlide: options.initialSlide || 0,
-            dots: options.dots || false
+            dots: options.dots || false,
+            arrows: options.arrows || false
         }
         this.containerNode = document.querySelector(containerNode);
         this.currentSlide = this.settings.initialSlide;
@@ -25,10 +34,14 @@ class Gallery {
         this.changeSlide = this.changeSlide.bind(this);
         this.addDots = this.addDots.bind(this);
         this.moveAfterDotClicked = this.moveAfterDotClicked.bind(this);
+        this.addArrows = this.addArrows.bind(this);
         this.handleHtml();
         this.setSize();
         if(this.settings.dots) {
             this.addDots();
+        }
+        if(this.settings.arrows) {
+            this.addArrows();
         }
         this.setEvents();
     }
@@ -64,9 +77,11 @@ class Gallery {
     setEvents() {
         window.addEventListener('resize', debounce(this.setSize, 400));
         this.lineNode.addEventListener('pointerdown', e => this.startDrag());
-        if(this.dotsContainer) {
-            this.dotsContainer.addEventListener('click', e => {
-                if(e.target.classList.contains(dotName)) this.moveAfterDotClicked(e.target)
+        if(this.dotsContainer || this.arrowsContainer) {
+            this.containerNode.addEventListener('click', e => {
+                if(e.target.classList.contains(dotName)) this.moveAfterDotClicked(e.target);
+                if(e.target.classList.contains(prevArrowName)) this.changeSlide('previous'); 
+                if(e.target.classList.contains(nextArrowName)) this.changeSlide('next'); 
             })
         }
     }
@@ -145,6 +160,7 @@ class Gallery {
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
                 this.containerNode.style.removeProperty('pointer-events');
+                this.handleArrowsState();
             }, 500); 
         }
         this.currentSlide -= 1;
@@ -160,17 +176,11 @@ class Gallery {
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
+            this.handleArrowsState();
         }, 500); 
     }
 
     addDots() {
-        // add dots container
-        // add dots into dots container
-        // listen dots container
-        // move line node
-        // if line node is moving through two or more slides, transition time should be longer
-        // change active dot
-        // if line node position is changing while dragging change active dot either
         this.dotsContainer = document.createElement('div');
         this.dotsContainer.className = dotsContainerName;
         this.dotsNodes = [];
@@ -184,6 +194,41 @@ class Gallery {
             this.dotsContainer.append(dot);
         }
         this.containerNode.append(this.dotsContainer);
+    }
+
+    addArrows() {
+        this.arrowsContainer = document.createElement('div');
+        this.arrowsContainer.className = arrowsContainerName;
+        this.containerNode.append(this.arrowsContainer);
+        const createArrow = (classToAdd) => {
+           this[classToAdd] = document.createElement('div');
+           this[classToAdd].className = arrowName;
+           this[classToAdd].classList.add(classToAdd);
+           this.arrowsContainer.append(this[classToAdd]);
+        }
+        createArrow(prevArrowName);
+        createArrow(nextArrowName);
+        this.handleArrowsState();
+    }
+
+    handleArrowsState() {
+        console.log(`currentSlide ${this.currentSlide}`);
+        console.log(`Size ${this.size}`);
+        const isLastSlide = this.currentSlide === (this.size - 1);
+        const isFirstSlide = this.currentSlide === 0;
+        if(!isLastSlide && !isFirstSlide) {
+            console.log('arrows are active')
+            this[nextArrowName].classList.remove(disabledArrowName);
+            this[prevArrowName].classList.remove(disabledArrowName);
+        }
+        if(isLastSlide) {
+            console.log('next arrow disabled');
+            return this[nextArrowName].classList.add(disabledArrowName);
+        }
+        if(isFirstSlide) {
+            this[prevArrowName].classList.add(disabledArrowName)
+            console.log('prev arrow disabled');
+        }
     }
 
     moveAfterDotClicked(clickedDot) {
@@ -215,6 +260,7 @@ class Gallery {
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
+            this.handleArrowsState();
         }, (transitionTime * 1000)); 
     }
 
@@ -223,8 +269,9 @@ class Gallery {
 const firstSlider = new Gallery('#landscape-slider',
     {
         spaceBetweenSlides: 50,
-        initialSlide: 2,
+        initialSlide: 0,
         dots: true,
+        arrows: true
     }
  );
 

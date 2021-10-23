@@ -23,6 +23,14 @@ h1 {
     }
 }
 
+.gallery-arrow {
+    transition: opacity 0.5s;
+    &.gallery-arrow-disabled {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+}
+
 .main-title {
     text-align: center;
 }
@@ -86,6 +94,62 @@ h1 {
         }
         &.gallery-dot-active::before {
             background-color: rgb(83, 181, 214);
+        }
+    }
+    & .gallery-arrow {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: calc(50% - 40px);
+        cursor: pointer;
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 50%;
+            width: 60%;
+            height: 60%;
+            pointer-events: none;
+            transition: transform 0.5s;
+            background: url('../app/img/slider-arrow.svg');
+        }
+        &::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            pointer-events: none;
+            border: 1px solid white;
+            background-color: rgba(240, 255, 255, 0.2);
+            transition: background-color 0.5s, transform 0.8s;
+        }
+        &:hover::after {
+            transform: scale(0);
+            background-color: rgba(240, 255, 255, 0);
+        }
+    }
+    & .gallery-arrow-prev {
+        left: 20px;
+        &::before {
+            left: 45%;
+            transform: translate(-50%, -50%) rotateZ(180deg);           
+        }
+        &:hover::before {
+            transform: translate(-50%, -50%) rotateZ(180deg) scale(1.2);           
+        }
+    }
+    & .gallery-arrow-next {
+        right: 20px;
+        &::before {
+            left: 55%;
+            transform: translate(-50%, -50%);           
+        }
+        &:hover::before {
+            transform: translate(-50%, -50%) scale(1.2);           
         }
     }
 }
