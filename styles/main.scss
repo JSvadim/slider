@@ -18,6 +18,7 @@ h1 {
 }
 
 .gallery-line {
+    touch-action: none;
     &.dragging {
         cursor: grab;
     }

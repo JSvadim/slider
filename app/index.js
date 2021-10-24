@@ -1,10 +1,10 @@
+const galleryClassName = 'gallery';
 const lineNodeClassName = 'gallery-line';
 const slideClassName = 'gallery-slide';
-const galleryClassName = 'gallery';
 
-const dotsContainerName = 'gallery-dots';
 const dotName = 'gallery-dot';
 const activeDotName = 'gallery-dot-active';
+const dotsContainerName = 'gallery-dots';
 
 const arrowsContainerName = 'gallery-arrows';
 const arrowName = 'gallery-arrow';
@@ -76,7 +76,7 @@ class Gallery {
 
     setEvents() {
         window.addEventListener('resize', debounce(this.setSize, 400));
-        this.lineNode.addEventListener('pointerdown', e => this.startDrag());
+        this.lineNode.addEventListener('pointerdown', this.startDrag);
         if(this.dotsContainer || this.arrowsContainer) {
             this.containerNode.addEventListener('click', e => {
                 if(e.target.classList.contains(dotName)) this.moveAfterDotClicked(e.target);
@@ -87,13 +87,17 @@ class Gallery {
     }
 
     startDrag() {
+        console.log('start dragging')
         this.clickPosition = event.clientX;
         this.lineNode.classList.add('dragging');
+        // document.body.style.touchAction = 'none';
+        // document.addEventListener('dragstart', e => e.preventDefault);
         window.addEventListener('pointermove', this.dragging);
         window.addEventListener('pointerup', this.stopDrag);
     }
 
     dragging() {
+        console.log('dragging')
         this.shift = event.clientX - this.clickPosition;
         this.currentLineNodePosition = this.shift + this.initialLineNodePosition;
         if(this.currentLineNodePosition > 0 ||
@@ -104,8 +108,12 @@ class Gallery {
     }
 
     stopDrag() {
+        console.log('stop dragging');
         window.removeEventListener('pointermove', this.dragging);
         window.removeEventListener('pointerup', this.stopDrag);
+        // document.body.style.removeProperty('touch-action');
+        // window.removeEventListener('dragstart', e => e.preventDefault());
+
         this.lineNode.classList.remove('dragging');
         // if overflow left
         if(this.currentLineNodePosition > 0) {
@@ -145,7 +153,7 @@ class Gallery {
 
     changeSlide(slideToChangeWith) {
         if(slideToChangeWith === 'next') {
-            if(this.currentSlide === this.size - 1) return console.log('bug...')
+            if(this.currentSlide === this.size - 1) return
             this.lineNode.style.transition = "all 0.5s";
             this.containerNode.style.pointerEvents = 'none';
             this.currentSlide += 1;

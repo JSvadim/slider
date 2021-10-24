@@ -105,6 +105,9 @@ h1 {
   padding: 15px 0 0 0;
 }
 
+.gallery-line {
+  touch-action: none;
+}
 .gallery-line.dragging {
   cursor: grab;
 }
