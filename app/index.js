@@ -144,9 +144,10 @@ class Gallery {
     }
 
     changeSlide(slideToChangeWith) {
-        this.lineNode.style.transition = "all 0.5s";
-        this.containerNode.style.pointerEvents = 'none';
         if(slideToChangeWith === 'next') {
+            if(this.currentSlide === this.size - 1) return console.log('bug...')
+            this.lineNode.style.transition = "all 0.5s";
+            this.containerNode.style.pointerEvents = 'none';
             this.currentSlide += 1;
             const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
             this.initialLineNodePosition = newPos;
@@ -157,12 +158,15 @@ class Gallery {
                 })
                 this.dotsNodes[this.currentSlide].classList.add(activeDotName);
             }
+            this.handleArrowsState();
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
                 this.containerNode.style.removeProperty('pointer-events');
-                this.handleArrowsState();
             }, 500); 
         }
+        if(this.currentSlide === 0) return
+        this.lineNode.style.transition = "all 0.5s";
+        this.containerNode.style.pointerEvents = 'none';
         this.currentSlide -= 1;
         const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
@@ -173,10 +177,10 @@ class Gallery {
             })
             this.dotsNodes[this.currentSlide].classList.add(activeDotName);
         }
+        this.handleArrowsState();
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
-            this.handleArrowsState();
         }, 500); 
     }
 
@@ -214,16 +218,12 @@ class Gallery {
     handleArrowsState() {
         const isLastSlide = this.currentSlide === (this.size - 1);
         const isFirstSlide = this.currentSlide === 0;
-        console.log(`isLastSlide: ${isLastSlide}`);
-        console.log(`isFirstSlide: ${isFirstSlide}`);
         this[nextArrowName].classList.remove(disabledArrowName);
         this[prevArrowName].classList.remove(disabledArrowName);
         if(isLastSlide) {
-            console.log('disabling last slide');
             return this[nextArrowName].classList.add(disabledArrowName);
         }
         if(isFirstSlide) {
-            console.log('disabling first slide');
             this[prevArrowName].classList.add(disabledArrowName)
         }
     }
@@ -254,10 +254,10 @@ class Gallery {
         const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
         this.lineNode.style.transform = `translateX(${newPos}px)`;
+        this.handleArrowsState();
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
-            this.handleArrowsState();
         }, (transitionTime * 1000)); 
     }
 
