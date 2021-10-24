@@ -212,22 +212,19 @@ class Gallery {
     }
 
     handleArrowsState() {
-        console.log(`currentSlide ${this.currentSlide}`);
-        console.log(`Size ${this.size}`);
         const isLastSlide = this.currentSlide === (this.size - 1);
         const isFirstSlide = this.currentSlide === 0;
-        if(!isLastSlide && !isFirstSlide) {
-            console.log('arrows are active')
-            this[nextArrowName].classList.remove(disabledArrowName);
-            this[prevArrowName].classList.remove(disabledArrowName);
-        }
+        console.log(`isLastSlide: ${isLastSlide}`);
+        console.log(`isFirstSlide: ${isFirstSlide}`);
+        this[nextArrowName].classList.remove(disabledArrowName);
+        this[prevArrowName].classList.remove(disabledArrowName);
         if(isLastSlide) {
-            console.log('next arrow disabled');
+            console.log('disabling last slide');
             return this[nextArrowName].classList.add(disabledArrowName);
         }
         if(isFirstSlide) {
+            console.log('disabling first slide');
             this[prevArrowName].classList.add(disabledArrowName)
-            console.log('prev arrow disabled');
         }
     }
 
@@ -272,8 +269,7 @@ const firstSlider = new Gallery('#landscape-slider',
         initialSlide: 0,
         dots: true,
         arrows: true
-    }
- );
+    });
 
 function wrapElementIntoDiv(divClass, el) {
     const wrapper = document.createElement('div');
