@@ -87,11 +87,10 @@ class Gallery {
     }
 
     startDrag() {
+        if(event.target.classList.contains(arrowName)) return
         console.log('start dragging')
         this.clickPosition = event.clientX;
         this.lineNode.classList.add('dragging');
-        // document.body.style.touchAction = 'none';
-        // document.addEventListener('dragstart', e => e.preventDefault);
         window.addEventListener('pointermove', this.dragging);
         window.addEventListener('pointerup', this.stopDrag);
     }
@@ -111,9 +110,6 @@ class Gallery {
         console.log('stop dragging');
         window.removeEventListener('pointermove', this.dragging);
         window.removeEventListener('pointerup', this.stopDrag);
-        // document.body.style.removeProperty('touch-action');
-        // window.removeEventListener('dragstart', e => e.preventDefault());
-
         this.lineNode.classList.remove('dragging');
         // if overflow left
         if(this.currentLineNodePosition > 0) {
