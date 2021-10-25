@@ -88,7 +88,6 @@ class Gallery {
 
     startDrag() {
         if(event.target.classList.contains(arrowName)) return
-        console.log('start dragging')
         this.clickPosition = event.clientX;
         this.lineNode.classList.add('dragging');
         window.addEventListener('pointermove', this.dragging);
@@ -96,7 +95,6 @@ class Gallery {
     }
 
     dragging() {
-        console.log('dragging')
         this.shift = event.clientX - this.clickPosition;
         this.currentLineNodePosition = this.shift + this.initialLineNodePosition;
         if(this.currentLineNodePosition > 0 ||
@@ -107,34 +105,44 @@ class Gallery {
     }
 
     stopDrag() {
-        console.log('stop dragging');
         window.removeEventListener('pointermove', this.dragging);
         window.removeEventListener('pointerup', this.stopDrag);
         this.lineNode.classList.remove('dragging');
         // if overflow left
         if(this.currentLineNodePosition > 0) {
+            console.log('1 if');
+            this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = "all 0.5s";
             this.lineNode.style.transform = `translateX(0px)`;
             this.initialLineNodePosition = 0;
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
+                this.containerNode.style.removeProperty('pointer-events');
             }, 500);
         }
         // if overflow right
         if(this.currentLineNodePosition < -this.maxDraggingValue) {
+            console.log(`2 if - currentPos: ${this.currentLineNodePosition}; 
+            maxDrVal: ${-this.maxDraggingValue}`);
+            this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = "all 0.5s";
             this.lineNode.style.transform = `translateX(${-this.maxDraggingValue}px)`;
             this.initialLineNodePosition = -this.maxDraggingValue;
+
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
+                this.containerNode.style.removeProperty('pointer-events');
             }, 500); 
         }
         // if swipe was not enough to change slide
         if(this.shift < 50 && this.shift > -50) {
+            console.log('3 if');
+            this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = "all 0.5s";
             this.lineNode.style.transform = `translateX(${this.initialLineNodePosition}px)`;
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
+                this.containerNode.style.removeProperty('pointer-events');
             }, 500); 
         }
         // next slide
@@ -155,6 +163,7 @@ class Gallery {
             this.currentSlide += 1;
             const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
             this.initialLineNodePosition = newPos;
+            this.currentLineNodePosition = newPos;
             this.lineNode.style.transform = `translateX(${newPos}px)`;
             if(this.dotsNodes) {
                 this.dotsNodes.forEach(dot => {
@@ -166,7 +175,7 @@ class Gallery {
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
                 this.containerNode.style.removeProperty('pointer-events');
-            }, 500); 
+            }, 600); 
         }
         if(this.currentSlide === 0) return
         this.lineNode.style.transition = "all 0.5s";
@@ -174,6 +183,7 @@ class Gallery {
         this.currentSlide -= 1;
         const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
+        this.currentLineNodePosition = newPos;
         this.lineNode.style.transform = `translateX(${newPos}px)`;
         if(this.dotsNodes) {
             this.dotsNodes.forEach(dot => {
@@ -185,7 +195,7 @@ class Gallery {
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
-        }, 500); 
+        }, 600); 
     }
 
     addDots() {
@@ -250,10 +260,10 @@ class Gallery {
         if(differenceBetweenIndexes === -1) return this.changeSlide('previous');
         if(differenceBetweenIndexes === 1) return this.changeSlide('next');
         // if there's at least one slide between current slide and slide to change with
+        this.containerNode.style.pointerEvents = 'none';
         let transitionTime = 0.5 * Math.abs(differenceBetweenIndexes);
         if(transitionTime > 2) transitionTime = 2;
         this.lineNode.style.transition = `all ${transitionTime}s`;
-        this.containerNode.style.pointerEvents = 'none';
         this.currentSlide += differenceBetweenIndexes;
         const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
