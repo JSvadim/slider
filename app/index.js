@@ -99,9 +99,11 @@ class Gallery {
         this.currentLineNodePosition = this.shift + this.initialLineNodePosition;
         if(this.currentLineNodePosition > 0 ||
             this.currentLineNodePosition < -this.maxDraggingValue) {
-            return this.lineNode.style.transform = `translateX(${(this.shift / 5) + this.initialLineNodePosition}px)`;
+            this.lineNode.style.transform = `translateX(${(this.shift / 5) + this.initialLineNodePosition}px)`;
+            return this.shift = 0;
         }
         this.lineNode.style.transform = `translateX(${this.currentLineNodePosition}px)`;
+        this.shift = 0;
     }
 
     stopDrag() {
@@ -110,7 +112,6 @@ class Gallery {
         this.lineNode.classList.remove('dragging');
         // if overflow left
         if(this.currentLineNodePosition > 0) {
-            console.log('1 if');
             this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = "all 0.5s";
             this.lineNode.style.transform = `translateX(0px)`;
@@ -118,25 +119,23 @@ class Gallery {
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
                 this.containerNode.style.removeProperty('pointer-events');
+                this.currentLineNodePosition = 0;
             }, 500);
         }
         // if overflow right
         if(this.currentLineNodePosition < -this.maxDraggingValue) {
-            console.log(`2 if - currentPos: ${this.currentLineNodePosition}; 
-            maxDrVal: ${-this.maxDraggingValue}`);
             this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = "all 0.5s";
             this.lineNode.style.transform = `translateX(${-this.maxDraggingValue}px)`;
             this.initialLineNodePosition = -this.maxDraggingValue;
-
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
                 this.containerNode.style.removeProperty('pointer-events');
+                this.currentLineNodePosition = 0;
             }, 500); 
         }
         // if swipe was not enough to change slide
         if(this.shift < 50 && this.shift > -50) {
-            console.log('3 if');
             this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = "all 0.5s";
             this.lineNode.style.transform = `translateX(${this.initialLineNodePosition}px)`;
