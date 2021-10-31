@@ -314,3 +314,5 @@ function debounce(clb, delay) {
         timer = setTimeout(clb, delay, args);
     }
 }
+
+// trying to get familiar with working with few branches :)
