@@ -199,9 +199,10 @@ h1 {
 .slider .gallery-arrow {
   width: 50px;
   height: 50px;
+  cursor: pointer;
   position: absolute;
   top: calc(50% - 40px);
-  cursor: pointer;
+  transition: transform 0.3s;
 }
 .slider .gallery-arrow::before {
   content: "";
@@ -228,9 +229,12 @@ h1 {
   background-color: rgba(240, 255, 255, 0.2);
   transition: background-color 0.5s, transform 0.8s;
 }
-.slider .gallery-arrow:hover::after {
-  transform: scale(0);
-  background-color: rgba(240, 255, 255, 0);
+.slider .gallery-arrow.gallery-arrow-disabled {
+  transform: initial;
+}
+.slider .gallery-arrow.gallery-arrow-clicked::after {
+  -webkit-animation: arrow-pulse 0.6s 1 forwards;
+          animation: arrow-pulse 0.6s 1 forwards;
 }
 .slider .gallery-arrow-prev {
   left: 20px;
@@ -253,6 +257,27 @@ h1 {
   transform: translate(-50%, -50%) scale(1.2);
 }
 
+@-webkit-keyframes arrow-pulse {
+  50% {
+    transform: scale(0.5);
+    background-color: rgba(240, 255, 255, 0);
+  }
+  100% {
+    background-color: rgba(240, 255, 255, 0.2);
+    transform: scale(1);
+  }
+}
+
+@keyframes arrow-pulse {
+  50% {
+    transform: scale(0.5);
+    background-color: rgba(240, 255, 255, 0);
+  }
+  100% {
+    background-color: rgba(240, 255, 255, 0.2);
+    transform: scale(1);
+  }
+}
 /* 
 @media(min-width: 576px) {
 

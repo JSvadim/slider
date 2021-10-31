@@ -11,6 +11,7 @@ const arrowName = 'gallery-arrow';
 const prevArrowName = 'gallery-arrow-prev';
 const nextArrowName = 'gallery-arrow-next';
 const disabledArrowName = 'gallery-arrow-disabled';
+const clickedArrowName = 'gallery-arrow-clicked';
 
 
 class Gallery {
@@ -80,8 +81,20 @@ class Gallery {
         if(this.dotsContainer || this.arrowsContainer) {
             this.containerNode.addEventListener('click', e => {
                 if(e.target.classList.contains(dotName)) this.moveAfterDotClicked(e.target);
-                if(e.target.classList.contains(prevArrowName)) this.changeSlide('previous'); 
-                if(e.target.classList.contains(nextArrowName)) this.changeSlide('next'); 
+                if(e.target.classList.contains(prevArrowName)) {
+                    this[prevArrowName].classList.add(clickedArrowName);
+                    this.changeSlide('previous');
+                    setTimeout(() => {
+                        this[prevArrowName].classList.remove(clickedArrowName);
+                    }, 500);
+                }; 
+                if(e.target.classList.contains(nextArrowName)) {
+                    this[nextArrowName].classList.add(clickedArrowName);
+                    this.changeSlide('next');
+                    setTimeout(() => {
+                        this[nextArrowName].classList.remove(clickedArrowName);
+                    }, 500);
+                }; 
             })
         }
     }
