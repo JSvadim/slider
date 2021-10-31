@@ -17,7 +17,11 @@
   },
   "homepage": "https://github.com/JSvadim/slider#readme",
   "devDependencies": {
+    "autoprefixer": "^10.4.0",
     "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-postcss": "^9.0.1",
+    "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.0.0",
     "sass": "^1.42.1"
   }

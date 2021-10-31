@@ -24,6 +24,10 @@ h1 {
     }
 }
 
+.gallery-slide {
+    transform: translateZ(0);
+}
+
 .gallery-arrow {
     transition: opacity 0.5s;
     &.gallery-arrow-disabled {
