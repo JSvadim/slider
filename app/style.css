@@ -243,18 +243,12 @@ h1 {
   left: 45%;
   transform: translate(-50%, -50%) rotateZ(180deg);
 }
-.slider .gallery-arrow-prev:hover::before {
-  transform: translate(-50%, -50%) rotateZ(180deg) scale(1.2);
-}
 .slider .gallery-arrow-next {
   right: 20px;
 }
 .slider .gallery-arrow-next::before {
   left: 55%;
   transform: translate(-50%, -50%);
-}
-.slider .gallery-arrow-next:hover::before {
-  transform: translate(-50%, -50%) scale(1.2);
 }
 
 @-webkit-keyframes arrow-pulse {

@@ -146,18 +146,12 @@ h1 {
             left: 45%;
             transform: translate(-50%, -50%) rotateZ(180deg);           
         }
-        &:hover::before {
-            transform: translate(-50%, -50%) rotateZ(180deg) scale(1.2);           
-        }
     }
     & .gallery-arrow-next {
         right: 20px;
         &::before {
             left: 55%;
             transform: translate(-50%, -50%);           
-        }
-        &:hover::before {
-            transform: translate(-50%, -50%) scale(1.2);           
         }
     }
 }
