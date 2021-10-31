@@ -100,10 +100,9 @@ class Gallery {
         if(this.currentLineNodePosition > 0 ||
             this.currentLineNodePosition < -this.maxDraggingValue) {
             this.lineNode.style.transform = `translateX(${(this.shift / 5) + this.initialLineNodePosition}px)`;
-            return this.shift = 0;
+            return
         }
         this.lineNode.style.transform = `translateX(${this.currentLineNodePosition}px)`;
-        this.shift = 0;
     }
 
     stopDrag() {
@@ -120,6 +119,7 @@ class Gallery {
                 this.lineNode.style.removeProperty('transition');
                 this.containerNode.style.removeProperty('pointer-events');
                 this.currentLineNodePosition = 0;
+                this.shift = 0;
             }, 500);
         }
         // if overflow right
@@ -132,24 +132,26 @@ class Gallery {
                 this.lineNode.style.removeProperty('transition');
                 this.containerNode.style.removeProperty('pointer-events');
                 this.currentLineNodePosition = 0;
+                this.shift = 0;
             }, 500); 
         }
         // if swipe was not enough to change slide
         if(this.shift < 50 && this.shift > -50) {
-            this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = "all 0.5s";
             this.lineNode.style.transform = `translateX(${this.initialLineNodePosition}px)`;
+            this.shift = 0;
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
-                this.containerNode.style.removeProperty('pointer-events');
             }, 500); 
         }
         // next slide
         if(this.shift < 0) {
+            this.shift = 0;
             return this.changeSlide('next');
         }
         // previous slide
         if(this.shift > 0) {
+            this.shift = 0;
             return this.changeSlide('previous')
         }
     }

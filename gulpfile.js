@@ -13,4 +13,4 @@ function watchFiles() {
 }
 
 exports.build = series(scss);
-exports.watchFiles = series(watchFiles);
+exports.watch = series(watchFiles);
