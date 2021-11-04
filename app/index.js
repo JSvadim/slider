@@ -1,5 +1,6 @@
 const galleryClassName = 'gallery';
 const lineNodeClassName = 'gallery-line';
+const verticalLineNodeClassName = 'gallery-line-vertical';
 const slideClassName = 'gallery-slide';
 
 const dotName = 'gallery-dot';
@@ -23,6 +24,7 @@ class Gallery {
             dots: options.dots || false,
             arrows: options.arrows || false,
             timeBetweenSlides: options.timeBetweenSlides || 500,
+            vertical: options.vertical || false
         }
         this.containerNode = document.querySelector(containerNode);
         this.currentSlide = this.settings.initialSlide;
@@ -37,6 +39,7 @@ class Gallery {
         this.addDots = this.addDots.bind(this);
         this.moveAfterDotClicked = this.moveAfterDotClicked.bind(this);
         this.addArrows = this.addArrows.bind(this);
+        this.lineNodeTranslatePropName = this.settings.vertical ? 'translateY' : 'translateX';
         this.handleHtml();
         this.setSize();
         if(this.settings.dots) {
@@ -46,12 +49,12 @@ class Gallery {
             this.addArrows();
         }
         this.setEvents();
-        this.removeLineNodeTransitionDebounced = debounce.call(this, this.removeLineNodeTransition.bind(this), this.settings.timeBetweenSlides);
+        this.removeLineNodeTransitionDebounced = debounce(this.removeLineNodeTransition.bind(this), this.settings.timeBetweenSlides);
     }
 
     handleHtml() {
         this.containerNode.innerHTML = `
-            <div class="${lineNodeClassName}">
+            <div class="${lineNodeClassName} ${this.settings.vertical ? verticalLineNodeClassName : ''}">
                 ${this.containerNode.innerHTML}
             </div>`
         this.containerNode.classList.add(galleryClassName);
@@ -59,7 +62,11 @@ class Gallery {
         this.slideNodes = Array.from(this.lineNode.children).map(node => {
             return wrapElementIntoDiv(slideClassName, node);
         });
-        this.slideNodes.forEach(node => node.style.marginRight = `${this.settings.spaceBetweenSlides}px`)
+        if(!this.settings.vertical) {
+            this.slideNodes.forEach(node => node.style.marginRight = `${this.settings.spaceBetweenSlides}px`)
+        }else {
+            this.slideNodes.forEach(node => node.style.marginBottom = `${this.settings.spaceBetweenSlides}px`)
+        }
         const pictures = Array.from(this.containerNode.querySelectorAll('img'));
         pictures.forEach(e => e.setAttribute('draggable', 'false'));
     }
@@ -67,13 +74,21 @@ class Gallery {
     setSize() {
         this.containerSizes = this.containerNode.getBoundingClientRect();
         this.size = this.slideNodes.length;
+        let lineNodePosition;
+        if(!this.settings.vertical) {
+            this.lineNode.style.width = ((this.containerSizes.width * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
+            this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - (this.containerSizes.width + this.settings.spaceBetweenSlides)
+            lineNodePosition = this.currentSlide * (this.containerSizes.width + this.settings.spaceBetweenSlides);
+        }else {
+            this.containerNode.style.height = `${this.slideNodes[0].offsetHeight}px`
+            this.containerSizes = this.containerNode.getBoundingClientRect();
+            this.maxDraggingValue = this.lineNode.getBoundingClientRect().height - (this.slideNodes[0].offsetHeight + this.settings.spaceBetweenSlides)
+            lineNodePosition = this.currentSlide * (this.slideNodes[0].offsetHeight + this.settings.spaceBetweenSlides);
+        }
         this.slideNodes.forEach(slide => {
             return slide.style.width = this.containerSizes.width + 'px'
         })
-        this.lineNode.style.width = ((this.containerSizes.width * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
-        this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - (this.containerSizes.width + this.settings.spaceBetweenSlides)
-        const lineNodePosition = this.currentSlide * (this.containerSizes.width + this.settings.spaceBetweenSlides);
-        this.lineNode.style.transform = `translateX(${-lineNodePosition}px)`
+        this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${-lineNodePosition}px)`
         this.initialLineNodePosition = -lineNodePosition;
     }
 
@@ -103,21 +118,27 @@ class Gallery {
 
     startDrag() {
         if(event.target.classList.contains(arrowName)) return
-        this.clickPosition = event.clientX;
+        this.clickPosition = this.settings.vertical ?
+            this.clickPosition = event.clientY :
+            this.clickPosition = event.clientX;
         this.lineNode.classList.add('dragging');
         window.addEventListener('pointermove', this.dragging);
         window.addEventListener('pointerup', this.stopDrag);
     }
 
     dragging() {
-        this.shift = event.clientX - this.clickPosition;
+        if(!this.settings.vertical) {
+            this.shift = event.clientX - this.clickPosition;
+        }else if(this.settings.vertical) {
+            this.shift = event.clientY - this.clickPosition;
+        }
         this.currentLineNodePosition = this.shift + this.initialLineNodePosition;
         if(this.currentLineNodePosition > 0 ||
             this.currentLineNodePosition < -this.maxDraggingValue) {
-            this.lineNode.style.transform = `translateX(${(this.shift / 5) + this.initialLineNodePosition}px)`;
+            this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${(this.shift / 5) + this.initialLineNodePosition}px)`;
             return
         }
-        this.lineNode.style.transform = `translateX(${this.currentLineNodePosition}px)`;
+        this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${this.currentLineNodePosition}px)`;
     }
 
     stopDrag() {
@@ -128,7 +149,7 @@ class Gallery {
         if(this.currentLineNodePosition > 0) {
             this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = `all 0.5s`;
-            this.lineNode.style.transform = `translateX(0px)`;
+            this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(0px)`;
             this.initialLineNodePosition = 0;
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
@@ -141,7 +162,7 @@ class Gallery {
         if(this.currentLineNodePosition < -this.maxDraggingValue) {
             this.containerNode.style.pointerEvents = 'none';
             this.lineNode.style.transition = `all 0.5s`;
-            this.lineNode.style.transform = `translateX(${-this.maxDraggingValue}px)`;
+            this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${-this.maxDraggingValue}px)`;
             this.initialLineNodePosition = -this.maxDraggingValue;
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
@@ -153,7 +174,7 @@ class Gallery {
         // if swipe was not enough to change slide
         if(this.shift < 50 && this.shift > -50) {
             this.lineNode.style.transition = `all 0.5s`;
-            this.lineNode.style.transform = `translateX(${this.initialLineNodePosition}px)`;
+            this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${this.initialLineNodePosition}px)`;
             this.shift = 0;
             return setTimeout(() => {
                 this.lineNode.style.removeProperty('transition');
@@ -176,10 +197,12 @@ class Gallery {
             if(this.currentSlide === this.size - 1) return
             this.lineNode.style.transition = `all ${this.settings.timeBetweenSlides/1000}s`;
             this.currentSlide += 1;
-            const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
+            const newPos = ((this.settings.vertical ?
+                -this.containerSizes.height : -this.containerSizes.width) * this.currentSlide) 
+                - (this.settings.spaceBetweenSlides * this.currentSlide);
             this.initialLineNodePosition = newPos;
             this.currentLineNodePosition = newPos;
-            this.lineNode.style.transform = `translateX(${newPos}px)`;
+            this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
             if(this.dotsNodes) {
                 this.dotsNodes.forEach(dot => {
                     dot.classList.remove(activeDotName);
@@ -187,17 +210,17 @@ class Gallery {
                 this.dotsNodes[this.currentSlide].classList.add(activeDotName);
             }
             this.handleArrowsState();
-            return setTimeout(() => {
-                this.removeLineNodeTransitionDebounced();
-            }, this.settings.timeBetweenSlides); 
+            return this.removeLineNodeTransitionDebounced();
         }
         if(this.currentSlide === 0) return
         this.lineNode.style.transition = `all ${this.settings.timeBetweenSlides/1000}s`;
         this.currentSlide -= 1;
-        const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
+        const newPos = ((this.settings.vertical ?
+            -this.containerSizes.height : -this.containerSizes.width) * this.currentSlide) 
+            - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
         this.currentLineNodePosition = newPos;
-        this.lineNode.style.transform = `translateX(${newPos}px)`;
+        this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
         if(this.dotsNodes) {
             this.dotsNodes.forEach(dot => {
                 dot.classList.remove(activeDotName);
@@ -205,9 +228,7 @@ class Gallery {
             this.dotsNodes[this.currentSlide].classList.add(activeDotName);
         }
         this.handleArrowsState();
-        setTimeout(() => {
-            this.removeLineNodeTransitionDebounced();
-        }, this.settings.timeBetweenSlides); 
+        this.removeLineNodeTransitionDebounced();
     }
 
     addDots() {
@@ -277,9 +298,11 @@ class Gallery {
         if(transitionTime > 3) transitionTime = 3;
         this.lineNode.style.transition = `all ${transitionTime}s`;
         this.currentSlide += differenceBetweenIndexes;
-        const newPos = (-this.containerSizes.width * this.currentSlide) - (this.settings.spaceBetweenSlides * this.currentSlide);
+        const newPos = ((this.settings.vertical ?
+            -this.containerSizes.height : -this.containerSizes.width) * this.currentSlide) 
+            - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
-        this.lineNode.style.transform = `translateX(${newPos}px)`;
+        this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
         this.handleArrowsState();
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
@@ -288,8 +311,8 @@ class Gallery {
     }
 
     removeLineNodeTransition() {
-        console.log(delay);
         this.lineNode.style.removeProperty('transition');
+        console.log('fired');
     }
 }
 

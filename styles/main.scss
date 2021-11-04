@@ -18,10 +18,15 @@ h1 {
 }
 
 .gallery-line {
+    display: flex;
+    user-select: none;
     touch-action: none;
     &.dragging {
         cursor: grab;
     }
+}
+.gallery-line-vertical {
+    flex-direction: column;
 }
 
 .gallery-slide {
@@ -57,10 +62,6 @@ h1 {
 .slider {
     position: relative;
     padding: 0 0 40px 0;
-    & .gallery-line {
-        display: flex;
-        user-select: none;
-    }
     & .gallery-dots {
         position: absolute;
         bottom: 7.5px;

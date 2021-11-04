@@ -104,11 +104,20 @@ h1 {
 }
 
 .gallery-line {
+  display: flex;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
   touch-action: none;
 }
 .gallery-line.dragging {
   cursor: -webkit-grab;
   cursor: grab;
+}
+
+.gallery-line-vertical {
+  flex-direction: column;
 }
 
 .gallery-slide {
@@ -148,13 +157,6 @@ h1 {
 .slider {
   position: relative;
   padding: 0 0 40px 0;
-}
-.slider .gallery-line {
-  display: flex;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
 }
 .slider .gallery-dots {
   position: absolute;
