@@ -1,5 +1,6 @@
 body {
     font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
 }
 
 h1, h2 {
@@ -15,11 +16,13 @@ h1, h2 {
 
 .wrapper {
     width: 100%;
-    overflow-x: hidden;
     min-height: 100vh;
     padding: 15px 0 0 0;
 }
 
+.gallery-wrapper {
+    overflow: hidden;
+}
 .gallery-line {
     display: flex;
     user-select: none;
@@ -50,7 +53,6 @@ h1, h2 {
 }
 
 .slider {
-    overflow: hidden;
     &__item {
         width: 100%;
         height: 400px;
@@ -174,13 +176,13 @@ h1, h2 {
 
 .vertical-slider {
     flex: 0 0 60%;
-    overflow: hidden;
+    height: 300px;
     &__slide {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 300px;
         color: white;
+        height: 100%;
         text-transform: uppercase;
         &-1 {
             background-color: purple;

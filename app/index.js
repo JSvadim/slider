@@ -1,5 +1,6 @@
 const galleryClassName = 'gallery';
 const lineNodeClassName = 'gallery-line';
+const galleryWrapperClassName = 'gallery-wrapper';
 const verticalLineNodeClassName = 'gallery-line-vertical';
 const slideClassName = 'gallery-slide';
 
@@ -55,11 +56,14 @@ class Gallery {
 
     handleHtml() {
         this.containerNode.innerHTML = `
-            <div class="${lineNodeClassName} ${this.settings.vertical ? verticalLineNodeClassName : ''}">
-                ${this.containerNode.innerHTML}
+            <div class="${galleryWrapperClassName}">
+                <div class="${lineNodeClassName} ${this.settings.vertical ? verticalLineNodeClassName : ''}">
+                    ${this.containerNode.innerHTML}
+                </div>
             </div>`
         this.containerNode.classList.add(galleryClassName);
         this.lineNode = this.containerNode.querySelector(`.${lineNodeClassName}`);
+        this.galleryWrapper = this.containerNode.querySelector(`.${galleryWrapperClassName}`);
         this.slideNodes = Array.from(this.lineNode.children).map(node => {
             return wrapElementIntoDiv(slideClassName, node);
         });
@@ -74,23 +78,24 @@ class Gallery {
 
     setSize() {
         this.containerSizes = this.containerNode.getBoundingClientRect();
-        console.log(this.containerNode.offsetWidth);
-        console.log(this.containerSizes);
         this.size = this.slideNodes.length;
         let lineNodePosition;
         if(!this.settings.vertical) {
             this.lineNode.style.width = ((this.containerSizes.width * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
+            this.slideNodes.forEach(slide => {
+                return slide.style.width = this.containerSizes.width + 'px'
+            })
             this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - (this.containerSizes.width + this.settings.spaceBetweenSlides)
             lineNodePosition = this.currentSlide * (this.containerSizes.width + this.settings.spaceBetweenSlides);
         }else {
-            this.containerNode.style.height = `${this.slideNodes[0].offsetHeight}px`
-            this.containerSizes = this.containerNode.getBoundingClientRect();
+            this.galleryWrapper.style.height = `${this.containerSizes.height}px`
+            this.lineNode.style.height = ((this.containerSizes.height * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
+            this.slideNodes.forEach(slide => {
+                return slide.style.height = this.containerSizes.height + 'px'
+            })
             this.maxDraggingValue = this.lineNode.getBoundingClientRect().height - (this.slideNodes[0].offsetHeight + this.settings.spaceBetweenSlides)
             lineNodePosition = this.currentSlide * (this.slideNodes[0].offsetHeight + this.settings.spaceBetweenSlides);
         }
-        this.slideNodes.forEach(slide => {
-            return slide.style.width = this.containerSizes.width + 'px'
-        })
         this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${-lineNodePosition}px)`
         this.initialLineNodePosition = -lineNodePosition;
     }
@@ -318,7 +323,6 @@ class Gallery {
     removeLineNodeTransition() {
         if(this.severalSlidesChangingAfterDotClicked) return 
         this.lineNode.style.removeProperty('transition');
-        console.log('fired');
     }
 }
 
