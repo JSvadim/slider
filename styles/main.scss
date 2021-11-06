@@ -2,12 +2,15 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-h1 {
+h1, h2 {
     font-size: 35px;
 }
 
 .mb-15 {
     margin-bottom: 15px;
+}
+.mb-30 {
+    margin-bottom: 30px;
 }
 
 .wrapper {
@@ -25,6 +28,7 @@ h1 {
         cursor: grab;
     }
 }
+
 .gallery-line-vertical {
     flex-direction: column;
 }
@@ -155,6 +159,46 @@ h1 {
             transform: translate(-50%, -50%);           
         }
     }
+}
+
+.vertical-slider-section {
+    display: flex;
+    &__title-wrapper {
+        flex: 0 0 40%;
+    }
+    &__title {
+        padding: 0 20px;
+        text-align: center;
+    }
+}
+
+.vertical-slider {
+    flex: 0 0 60%;
+    overflow: hidden;
+    &__slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 300px;
+        color: white;
+        text-transform: uppercase;
+        &-1 {
+            background-color: purple;
+        }
+        &-2 {
+            background-color: orangered;
+        }
+        &-3 {
+            background-color: palevioletred;
+        }
+        &-4 {
+            background-color: rebeccapurple;
+        }
+        &-5 {
+            background-color: seagreen;
+        }
+    }
+
 }
 
 @keyframes arrow-pulse {

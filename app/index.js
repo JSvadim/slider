@@ -40,6 +40,7 @@ class Gallery {
         this.moveAfterDotClicked = this.moveAfterDotClicked.bind(this);
         this.addArrows = this.addArrows.bind(this);
         this.lineNodeTranslatePropName = this.settings.vertical ? 'translateY' : 'translateX';
+        this.severalSlidesChangingAfterDotClicked = false;
         this.handleHtml();
         this.setSize();
         if(this.settings.dots) {
@@ -73,6 +74,8 @@ class Gallery {
 
     setSize() {
         this.containerSizes = this.containerNode.getBoundingClientRect();
+        console.log(this.containerNode.offsetWidth);
+        console.log(this.containerSizes);
         this.size = this.slideNodes.length;
         let lineNodePosition;
         if(!this.settings.vertical) {
@@ -304,13 +307,16 @@ class Gallery {
         this.initialLineNodePosition = newPos;
         this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
         this.handleArrowsState();
+        this.severalSlidesChangingAfterDotClicked = true;
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
+            this.severalSlidesChangingAfterDotClicked = false;
         }, (transitionTime * 1000)); 
     }
 
     removeLineNodeTransition() {
+        if(this.severalSlidesChangingAfterDotClicked) return 
         this.lineNode.style.removeProperty('transition');
         console.log('fired');
     }
@@ -323,6 +329,16 @@ const firstSlider = new Gallery('#landscape-slider',
         dots: true,
         arrows: true,
         timeBetweenSlides: 1000,
+    });
+
+const verticalSlider = new Gallery('#vertical-slider',
+    {
+        spaceBetweenSlides: 20,
+        initialSlide: 2,
+        dots: true,
+        arrows: true,
+        timeBetweenSlides: 500,
+        vertical: true,
     });
 
 function wrapElementIntoDiv(divClass, el) {
