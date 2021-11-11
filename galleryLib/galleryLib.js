@@ -303,8 +303,8 @@ class Gallery {
         // if there's at least one slide between current slide and slide to change with
         this.containerNode.style.pointerEvents = 'none';
         let transitionTime = this.settings.timeBetweenSlides * Math.abs(differenceBetweenIndexes);
-        if(transitionTime > 3) transitionTime = 3;
-        this.lineNode.style.transition = `all ${transitionTime}s`;
+        if(transitionTime > 3000) transitionTime = 3000;
+        this.lineNode.style.transition = `all ${transitionTime/1000}s`;
         this.currentSlide += differenceBetweenIndexes;
         const newPos = ((this.settings.vertical ?
             -this.containerSizes.height : -this.containerSizes.width) * this.currentSlide) 
@@ -317,7 +317,7 @@ class Gallery {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
             this.severalSlidesChangingAfterDotClicked = false;
-        }, (transitionTime * 1000)); 
+        }, transitionTime); 
     }
 
     removeLineNodeTransition() {
@@ -325,25 +325,6 @@ class Gallery {
         this.lineNode.style.removeProperty('transition');
     }
 }
-
-const firstSlider = new Gallery('#landscape-slider',
-    {
-        spaceBetweenSlides: 50,
-        initialSlide: 0,
-        dots: true,
-        arrows: true,
-        timeBetweenSlides: 1000,
-    });
-
-const verticalSlider = new Gallery('#vertical-slider',
-    {
-        spaceBetweenSlides: 20,
-        initialSlide: 2,
-        dots: true,
-        arrows: true,
-        timeBetweenSlides: 500,
-        vertical: true,
-    });
 
 function wrapElementIntoDiv(divClass, el) {
     const wrapper = document.createElement('div');
@@ -360,5 +341,3 @@ function debounce(clb, delay) {
         timer = setTimeout(clb, delay, args);
     }
 }
-
-// trying to get familiar with working with few branches :)

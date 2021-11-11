@@ -1,0 +1,71 @@
+.gallery-wrapper {
+  overflow: hidden;
+  height: 100%;
+}
+
+.gallery-line {
+  display: flex;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  touch-action: none;
+  height: 100%;
+}
+.gallery-line.dragging {
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.gallery-line-vertical {
+  flex-direction: column;
+}
+
+.gallery-slide {
+  transform: translateZ(0);
+}
+
+.gallery-arrow {
+  position: absolute;
+  cursor: pointer;
+  position: absolute;
+  transition: opacity 0.5s;
+}
+.gallery-arrow.gallery-arrow-disabled {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.gallery-dots {
+  position: absolute;
+}
+
+.gallery-dot {
+  cursor: pointer;
+}
+.gallery-dot::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: lightblue;
+  transition: background-color 0.5s;
+}
+.gallery-dot:hover::before {
+  background-color: #80cae2;
+}
+.gallery-dot.gallery-dot-active {
+  pointer-events: none;
+}
+.gallery-dot.gallery-dot-active::before {
+  background-color: #53b5d6;
+}
+.gallery-dot:last-child {
+  margin-right: 0;
+  margin-bottom: 0;
+}
