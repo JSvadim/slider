@@ -242,14 +242,14 @@ h2 {
         bottom: 5px;
         right: 5px;
         &::before {
-            transform: translate(32%, 35%) rotateZ(90deg);
+            transform: translate(32%, -44%) rotateZ(90deg);
         }
     }
     .gallery-arrow-prev {
         top: 5px;
         right: 5px;
         &::before {
-            transform: translate(32%, 30%) rotateZ(-90deg);
+            transform: translate(32%, -50%) rotateZ(-90deg);
         }
     }
     .gallery-dots {
@@ -260,6 +260,11 @@ h2 {
     .gallery-dot {
         margin-bottom: 7px;
     }
+}
+.gallery-arrows:focus,
+.gallery-arrow:focus,
+.gallery-dot:focus {
+    outline: 1px solid red;
 }
 
 @keyframes arrow-pulse {

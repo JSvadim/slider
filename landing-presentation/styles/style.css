@@ -332,14 +332,14 @@ h2 {
   right: 5px;
 }
 .vertical-slider .gallery-arrow-next::before {
-  transform: translate(32%, 35%) rotateZ(90deg);
+  transform: translate(32%, -44%) rotateZ(90deg);
 }
 .vertical-slider .gallery-arrow-prev {
   top: 5px;
   right: 5px;
 }
 .vertical-slider .gallery-arrow-prev::before {
-  transform: translate(32%, 30%) rotateZ(-90deg);
+  transform: translate(32%, -50%) rotateZ(-90deg);
 }
 .vertical-slider .gallery-dots {
   right: 20px;
@@ -348,6 +348,12 @@ h2 {
 }
 .vertical-slider .gallery-dot {
   margin-bottom: 7px;
+}
+
+.gallery-arrows:focus,
+.gallery-arrow:focus,
+.gallery-dot:focus {
+  outline: 1px solid red;
 }
 
 @-webkit-keyframes arrow-pulse {

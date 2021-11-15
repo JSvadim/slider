@@ -44,11 +44,11 @@ class Gallery {
         this.severalSlidesChangingAfterDotClicked = false;
         this.handleHtml();
         this.setSize();
-        if(this.settings.dots) {
-            this.addDots();
-        }
         if(this.settings.arrows) {
             this.addArrows();
+        }
+        if(this.settings.dots) {
+            this.addDots();
         }
         this.setEvents();
         this.removeLineNodeTransitionDebounced = debounce(this.removeLineNodeTransition.bind(this), this.settings.timeBetweenSlides);
@@ -244,7 +244,7 @@ class Gallery {
         this.dotsContainer.className = dotsContainerName;
         this.dotsNodes = [];
         for (let i = 0; i < this.slideNodes.length; i++) {
-            const dot = document.createElement('div');
+            const dot = document.createElement('button');
             dot.className = dotName;
             if(this.settings.initialSlide === i) {
                 dot.classList.add(activeDotName);
@@ -252,18 +252,35 @@ class Gallery {
             this.dotsNodes.push(dot);
             this.dotsContainer.append(dot);
         }
+        // for accessibility start
+        this.dotsNodes.forEach((node,index) => {
+            node.setAttribute('aria-label', `slide ${index + 1}`);
+        })
+        this.dotsContainer.setAttribute('role', 'toolbar');
+        // for accessibility end
         this.containerNode.append(this.dotsContainer);
     }
 
     addArrows() {
         this.arrowsContainer = document.createElement('div');
         this.arrowsContainer.className = arrowsContainerName;
+        // for accessibility start
+        this.arrowsContainer.setAttribute('role', 'toolbar');
+        this.arrowsContainer.setAttribute('aria-label', 'slider arrows');
+        // for accessibility end
         this.containerNode.append(this.arrowsContainer);
         const createArrow = (classToAdd) => {
-           this[classToAdd] = document.createElement('div');
-           this[classToAdd].className = arrowName;
-           this[classToAdd].classList.add(classToAdd);
-           this.arrowsContainer.append(this[classToAdd]);
+            this[classToAdd] = document.createElement('button');
+            this[classToAdd].className = arrowName;
+            this[classToAdd].classList.add(classToAdd);
+            // for accessibility start
+            if(classToAdd === 'gallery-arrow-prev') {
+                this[classToAdd].setAttribute('aria-label', 'previous slide');
+            }else {
+                this[classToAdd].setAttribute('aria-label', 'next slide');
+            } 
+            // for accessibility end
+            this.arrowsContainer.append(this[classToAdd]);
         }
         createArrow(prevArrowName);
         createArrow(nextArrowName);

@@ -26,9 +26,9 @@
 }
 
 .gallery-arrow {
+  display: block;
   position: absolute;
   cursor: pointer;
-  position: absolute;
   transition: opacity 0.5s;
 }
 .gallery-arrow.gallery-arrow-disabled {
@@ -42,6 +42,7 @@
 
 .gallery-dot {
   cursor: pointer;
+  display: block;
 }
 .gallery-dot::before {
   content: "";

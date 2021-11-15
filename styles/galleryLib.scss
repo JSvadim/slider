@@ -19,9 +19,9 @@
     transform: translateZ(0);
 }
 .gallery-arrow {
+    display: block;
     position: absolute;
     cursor: pointer;
-    position: absolute;
     transition: opacity 0.5s;
     &.gallery-arrow-disabled {
         pointer-events: none;
@@ -33,6 +33,7 @@
 }
 .gallery-dot {
     cursor: pointer;
+    display: block;
     &::before {
         content: '';
         display: block;
