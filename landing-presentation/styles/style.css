@@ -350,10 +350,11 @@ h2 {
   margin-bottom: 7px;
 }
 
-.gallery-arrows:focus,
-.gallery-arrow:focus,
-.gallery-dot:focus {
-  outline: 1px solid red;
+.gallery-arrows:focus-visible,
+.gallery-arrow:focus-visible,
+.gallery-dot:focus-visible,
+.burger__btn:focus-visible {
+  outline: 5px solid red;
 }
 
 @-webkit-keyframes arrow-pulse {

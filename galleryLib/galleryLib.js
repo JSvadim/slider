@@ -38,12 +38,18 @@ class Gallery {
         this.stopDrag = this.stopDrag.bind(this);
         this.changeSlide = this.changeSlide.bind(this);
         this.addDots = this.addDots.bind(this);
+        this.handleDotsState = this.handleDotsState.bind(this);
         this.moveAfterDotClicked = this.moveAfterDotClicked.bind(this);
         this.addArrows = this.addArrows.bind(this);
+        this.handleArrowsState = this.handleArrowsState.bind(this);
+        this.setSlidesTabIndex = this.setSlidesTabIndex.bind(this);
         this.lineNodeTranslatePropName = this.settings.vertical ? 'translateY' : 'translateX';
         this.severalSlidesChangingAfterDotClicked = false;
+        this.createDivForScreenReader = this.createDivForScreenReader.bind(this);
+        this.screenReaderTellsActiveSlideContent = this.screenReaderTellsActiveSlideContent.bind(this);
         this.handleHtml();
         this.setSize();
+        this.createDivForScreenReader();
         if(this.settings.arrows) {
             this.addArrows();
         }
@@ -67,6 +73,7 @@ class Gallery {
         this.slideNodes = Array.from(this.lineNode.children).map(node => {
             return wrapElementIntoDiv(slideClassName, node);
         });
+        this.setSlidesTabIndex(true);
         if(!this.settings.vertical) {
             this.slideNodes.forEach(node => node.style.marginRight = `${this.settings.spaceBetweenSlides}px`)
         }else {
@@ -211,6 +218,7 @@ class Gallery {
             this.initialLineNodePosition = newPos;
             this.currentLineNodePosition = newPos;
             this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
+            this.setSlidesTabIndex();
             if(this.dotsNodes) {
                 this.dotsNodes.forEach(dot => {
                     dot.classList.remove(activeDotName);
@@ -218,6 +226,7 @@ class Gallery {
                 this.dotsNodes[this.currentSlide].classList.add(activeDotName);
             }
             this.handleArrowsState();
+            this.handleDotsState();
             return this.removeLineNodeTransitionDebounced();
         }
         if(this.currentSlide === 0) return
@@ -229,6 +238,7 @@ class Gallery {
         this.initialLineNodePosition = newPos;
         this.currentLineNodePosition = newPos;
         this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
+        this.setSlidesTabIndex();
         if(this.dotsNodes) {
             this.dotsNodes.forEach(dot => {
                 dot.classList.remove(activeDotName);
@@ -236,6 +246,7 @@ class Gallery {
             this.dotsNodes[this.currentSlide].classList.add(activeDotName);
         }
         this.handleArrowsState();
+        this.handleDotsState();
         this.removeLineNodeTransitionDebounced();
     }
 
@@ -255,9 +266,14 @@ class Gallery {
         // for accessibility start
         this.dotsNodes.forEach((node,index) => {
             node.setAttribute('aria-label', `slide ${index + 1}`);
+            if(index !== this.currentSlide) {
+                node.setAttribute('aria-pressed', `false`);
+            }else {
+                node.setAttribute('aria-pressed', `true`);
+            }
         })
         this.dotsContainer.setAttribute('role', 'toolbar');
-        // for accessibility end
+        // for accessibility finish
         this.containerNode.append(this.dotsContainer);
     }
 
@@ -292,27 +308,29 @@ class Gallery {
         const isFirstSlide = this.currentSlide === 0;
         this[nextArrowName].classList.remove(disabledArrowName);
         this[prevArrowName].classList.remove(disabledArrowName);
+        this[nextArrowName].removeAttribute('disabled');
+        this[prevArrowName].removeAttribute('disabled');
         if(isLastSlide) {
+            this[nextArrowName].setAttribute('disabled', '');
             return this[nextArrowName].classList.add(disabledArrowName);
         }
         if(isFirstSlide) {
-            this[prevArrowName].classList.add(disabledArrowName)
+            this[prevArrowName].setAttribute('disabled', '');
+            this[prevArrowName].classList.add(disabledArrowName);
         }
     }
 
-    moveAfterDotClicked(clickedDot) {
-        let clickedDotIndex;
-        for (let i = 0; i < this.dotsNodes.length; i++) {
-            const dot = this.dotsNodes[i];
-            if(dot === clickedDot) {
-                clickedDotIndex = i
-                break
-            }
-        }
+    handleDotsState() {
         this.dotsNodes.forEach(node => {
             node.classList.remove(activeDotName);
+            node.setAttribute('aria-pressed', 'false');
         })
-        this.dotsNodes[clickedDotIndex].classList.add(activeDotName);
+        this.dotsNodes[this.currentSlide].classList.add(activeDotName);
+        this.dotsNodes[this.currentSlide].setAttribute('aria-pressed', 'true');
+    }
+
+    moveAfterDotClicked(clickedDot) {
+        let clickedDotIndex = this.dotsNodes.indexOf(clickedDot);
         let differenceBetweenIndexes = clickedDotIndex - this.currentSlide;
         // if we need to change slide with second or previous
         if(differenceBetweenIndexes === -1) return this.changeSlide('previous');
@@ -329,7 +347,9 @@ class Gallery {
         this.initialLineNodePosition = newPos;
         this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
         this.handleArrowsState();
+        this.handleDotsState();
         this.severalSlidesChangingAfterDotClicked = true;
+        this.setSlidesTabIndex();
         setTimeout(() => {
             this.lineNode.style.removeProperty('transition');
             this.containerNode.style.removeProperty('pointer-events');
@@ -341,6 +361,40 @@ class Gallery {
         if(this.severalSlidesChangingAfterDotClicked) return 
         this.lineNode.style.removeProperty('transition');
     }
+
+    createDivForScreenReader() {
+        let containerForScreenReaderDivs = document.querySelector('.screenReaderDivsContainer');
+        if(!containerForScreenReaderDivs) {
+            containerForScreenReaderDivs = document.createElement('div');
+            containerForScreenReaderDivs.classList.add('screenReaderDivsContainer');
+            document.body.appendChild(containerForScreenReaderDivs);
+        }
+        this.screenReaderDiv = document.createElement("div");
+        this.screenReaderDiv.style.position = 'fixed';
+        this.screenReaderDiv.style.width = '0px';
+        this.screenReaderDiv.style.height = '0px';
+        this.screenReaderDiv.style.padding = '0px';
+        this.screenReaderDiv.style.margin = '-1px';
+        this.screenReaderDiv.style.overflow = 'hidden';
+        this.screenReaderDiv.style.border = 'none';
+        this.screenReaderDiv.style.fontSize = '0px';
+        containerForScreenReaderDivs.appendChild(this.screenReaderDiv);
+        this.screenReaderDiv.setAttribute('aria-live', 'assertive');
+    }
+
+    screenReaderTellsActiveSlideContent() {
+        console.log(this.screenReaderDiv);
+        this.screenReaderDiv.innerHTML = this.slideNodes[this.currentSlide].innerHTML;
+    }
+
+    setSlidesTabIndex(firstCall = false) {
+        this.slideNodes.forEach(el => el.removeAttribute('tabindex'));
+        this.slideNodes[this.currentSlide].setAttribute('tabindex', '0');
+        if(!firstCall) {
+            this.screenReaderTellsActiveSlideContent()
+        }
+    }
+
 }
 
 function wrapElementIntoDiv(divClass, el) {
