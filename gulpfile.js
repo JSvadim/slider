@@ -33,8 +33,8 @@ function landingHtml() {
     .pipe(dest(`${APP_NAME}/`))
 }
 function landingImg() {
-    del(`${APP_NAME}/img/*.*`);
-    return src(`Source/${APP_NAME}/img/*.*`)
+    del(`${APP_NAME}/img/**/*.*`);
+    return src(`Source/${APP_NAME}/img/**/*.*`)
     .pipe(dest(`${APP_NAME}/img/`))
 }
 
