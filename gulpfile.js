@@ -24,7 +24,7 @@ function landingStyles() {
     .pipe(dest(`${APP_NAME}/styles/`));
 } 
 function landingJS() {
-    return src(`Source/${APP_NAME}/*.js`)
+    return src(`Source/${APP_NAME}/js/*.js`)
     .pipe(concat('index.js'))
     .pipe(dest(APP_NAME));
 }
@@ -96,7 +96,7 @@ function cb() {}
 
 function watchFiles() {
     watch(`Source/${APP_NAME}/styles/*.scss`, series(landingStyles));
-    watch(`Source/${APP_NAME}/*.js`, series(landingJS));
+    watch(`Source/${APP_NAME}/js/*.js`, series(landingJS));
     watch(`Source/${APP_NAME}/index.html`, series(landingHtml));
     watch(`Source/${APP_NAME}/img/`, series(landingImg));
     watch(`Source/${APP_NAME}/fonts/`, series(clearReadyFontsFolder,

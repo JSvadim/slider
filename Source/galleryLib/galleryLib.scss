@@ -22,10 +22,8 @@
     display: block;
     position: absolute;
     cursor: pointer;
-    transition: opacity 0.5s;
     &.gallery-arrow-disabled {
         pointer-events: none;
-        opacity: 0.7;
     }
 }
 .gallery-dots {

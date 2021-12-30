@@ -18,7 +18,7 @@ const clickedArrowName = 'gallery-arrow-clicked';
 
 class Gallery {
 
-    constructor(containerNode, options = {}) {
+    constructor(selector, options = {}) {
         this.settings = {
             spaceBetweenSlides: options.spaceBetweenSlides || 0,
             initialSlide: options.initialSlide || 0,
@@ -27,7 +27,7 @@ class Gallery {
             timeBetweenSlides: options.timeBetweenSlides || 500,
             vertical: options.vertical || false
         }
-        this.containerNode = document.querySelector(containerNode);
+        this.containerNode = document.querySelector(selector);
         this.currentSlide = this.settings.initialSlide;
         this.initialLineNodePosition = 0;
         this.handleHtml = this.handleHtml.bind(this);
@@ -84,12 +84,13 @@ class Gallery {
     }
 
     setSize() {
-        this.containerSizes = this.containerNode.getBoundingClientRect();
+        this.containerSizes = this.galleryWrapper.getBoundingClientRect();
         this.size = this.slideNodes.length;
         let lineNodePosition;
         if(!this.settings.vertical) {
             this.lineNode.style.width = ((this.containerSizes.width * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
             this.slideNodes.forEach(slide => {
+                slide.style.height = this.containerSizes.height + 'px';
                 return slide.style.width = this.containerSizes.width + 'px'
             })
             this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - (this.containerSizes.width + this.settings.spaceBetweenSlides)
@@ -98,6 +99,7 @@ class Gallery {
             this.galleryWrapper.style.height = `${this.containerSizes.height}px`
             this.lineNode.style.height = ((this.containerSizes.height * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
             this.slideNodes.forEach(slide => {
+                slide.style.width = this.containerSizes.width + 'px';
                 return slide.style.height = this.containerSizes.height + 'px'
             })
             this.maxDraggingValue = this.lineNode.getBoundingClientRect().height - (this.slideNodes[0].offsetHeight + this.settings.spaceBetweenSlides)
@@ -219,14 +221,12 @@ class Gallery {
             this.currentLineNodePosition = newPos;
             this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
             this.setSlidesTabIndex();
-            if(this.dotsNodes) {
-                this.dotsNodes.forEach(dot => {
-                    dot.classList.remove(activeDotName);
-                })
-                this.dotsNodes[this.currentSlide].classList.add(activeDotName);
+            if(this.settings.arrows) {
+                this.handleArrowsState();
             }
-            this.handleArrowsState();
-            this.handleDotsState();
+            if(this.settings.dots) {
+                this.handleDotsState();
+            }
             return this.removeLineNodeTransitionDebounced();
         }
         if(this.currentSlide === 0) return
@@ -239,14 +239,12 @@ class Gallery {
         this.currentLineNodePosition = newPos;
         this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
         this.setSlidesTabIndex();
-        if(this.dotsNodes) {
-            this.dotsNodes.forEach(dot => {
-                dot.classList.remove(activeDotName);
-            })
-            this.dotsNodes[this.currentSlide].classList.add(activeDotName);
+        if(this.settings.arrows) {
+            this.handleArrowsState();
         }
-        this.handleArrowsState();
-        this.handleDotsState();
+        if(this.settings.dots) {
+            this.handleDotsState();
+        }
         this.removeLineNodeTransitionDebounced();
     }
 

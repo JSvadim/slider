@@ -5,10 +5,107 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GalleryLIB</title>
+    <link rel="stylesheet" href="../galleryLib/galleryLib.min.css">
     <link rel="stylesheet" href="styles/style.min.css">
+    <script defer src="../galleryLib/galleryLib.js"></script>
     <script defer src="index.js"></script>
 </head>
 <body>
-    
+    <div class="wrapper">
+        <header class="header">
+            <!-- it's not time for this -->
+        </header>
+        <main class="main">
+            <div class="first-screen">
+                <div class="first-screen__left-part">
+                    <div class="first-screen__logo">
+                        <h1 class="first-screen__logo-big">SliderLIB</h1>
+                        <p class="first-screen__logo-small">DRAGGABLE & TOUCHABLE</p>
+                    </div>
+                    <div class="first-screen__top-slider">
+                        <div class="first-screen__top-slider-wrapper">
+                            <div class="first-screen__top-slider-pic-container">
+                                <picture>
+                                    <source type="image/webp" srcset="img/fake-sliders-pics/first__first.webp">
+                                    <img class="first-screen__top-slider-left-pic"
+                                        src="img/fake-sliders-pics/first__first.png" alt="example picture 1">
+                                </picture>
+                            </div>
+                            <div class="first-screen__top-slider-pic-container">
+                                <picture>
+                                    <source type="image/webp" srcset="img/fake-sliders-pics/first__second.webp">
+                                    <img class="first-screen__top-slider-right-pic"
+                                        src="img/fake-sliders-pics/first__second.png" alt="example picture 2">
+                                </picture>
+                            </div>
+                            <div class="first-screen__top-slider-decor-inside">
+                                <img class="first-screen__top-slider-decor-inside-pic" src="img/icons/touch.svg"
+                                    alt="picture of touch">
+                            </div>
+                        </div>
+                        <img class="first-screen__top-slider-decor-outside-touch" src="img/icons/touch-with-line.svg"
+                            alt="picture of touch again">
+                        <img class="first-screen__top-slider-decor-outside-drag" src="img/icons/click.svg"
+                            alt="picture of mouse click">
+                        <div class="first-screen__top-slider-dots">
+                            <div class="first-screen__top-slider-dot"></div>
+                            <div class="first-screen__top-slider-dot first-screen__top-slider-dot--active"></div>
+                            <div class="first-screen__top-slider-dot"></div>
+                            <div class="first-screen__top-slider-dot"></div>
+                            <div class="first-screen__top-slider-dot"></div>
+                        </div>
+                    </div>
+                    <div class="first-screen__bottom-slider">
+                        <div class="first-screen__bottom-slider-body">
+                            <picture>
+                                <source type="image/webp" srcset="img/fake-sliders-pics/second__first.webp">
+                                <img class="first-screen__bottom-slider-img"
+                                    src="img/fake-sliders-pics/second__first.png" alt="example picture 2">
+                            </picture>
+                            <div class="first-screen__bottom-slider-arrow first-screen__bottom-slider-arrow--top"></div>
+                            <div class="first-screen__bottom-slider-arrow first-screen__bottom-slider-arrow--bottom">
+                            </div>
+                        </div>
+                        <p class="first-screen__bottom-slider-title">Vertical align</p>
+                    </div>
+                </div>
+                <section class="first-screen__right-part">
+                    <h2 class="first-screen__right-part-title">Accessible for screen readers</h2>
+                    <p class="first-screen__right-part-description">
+                        “After slide changes screen-reader tells inner content of new active slide” 
+                    </p>
+                </section>
+            </div>
+            <section class="demos">
+                <div class="container">
+                    <div class="demos__inner">
+                        <h2 class="demos__title section-title">demos</h2>
+                        <section class="demos__item">
+                            <h3 class="demos__item-title">SPACE BETWEEN SLIDES</h3>
+                            <div class="demos__item-slider demos__item-slider--space-between" id="spaceBetween">
+                                <div class="demos__item-slide">
+                                    <p class="demos__item-slide-inner">1</p>
+                                </div>
+                                <div class="demos__item-slide">
+                                    <p class="demos__item-slide-inner">2</p>
+                                </div>
+                                <div class="demos__item-slide">
+                                    <p class="demos__item-slide-inner">3</p>
+                                </div>
+                                <div class="demos__item-slide">
+                                    <p class="demos__item-slide-inner">4</p>
+                                </div>
+                            </div>
+                            <div class="demos__item-code">
+                                <p class="demos__item-code-inner">
+        
+                                </p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
