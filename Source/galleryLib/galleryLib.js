@@ -344,8 +344,12 @@ class Gallery {
             - (this.settings.spaceBetweenSlides * this.currentSlide);
         this.initialLineNodePosition = newPos;
         this.lineNode.style.transform = `${this.lineNodeTranslatePropName}(${newPos}px)`;
-        this.handleArrowsState();
-        this.handleDotsState();
+        if(this.settings.arrows) {
+            this.handleArrowsState();
+        }
+        if(this.settings.dots) {
+            this.handleDotsState();
+        }
         this.severalSlidesChangingAfterDotClicked = true;
         this.setSlidesTabIndex();
         setTimeout(() => {
@@ -381,7 +385,6 @@ class Gallery {
     }
 
     screenReaderTellsActiveSlideContent() {
-        console.log(this.screenReaderDiv);
         this.screenReaderDiv.innerHTML = this.slideNodes[this.currentSlide].innerHTML;
     }
 
