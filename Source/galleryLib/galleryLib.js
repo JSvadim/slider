@@ -96,7 +96,6 @@ class Gallery {
             this.maxDraggingValue = this.lineNode.getBoundingClientRect().width - (this.containerSizes.width + this.settings.spaceBetweenSlides)
             lineNodePosition = this.currentSlide * (this.containerSizes.width + this.settings.spaceBetweenSlides);
         }else {
-            this.galleryWrapper.style.height = `${this.containerSizes.height}px`
             this.lineNode.style.height = ((this.containerSizes.height * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
             this.slideNodes.forEach(slide => {
                 slide.style.width = this.containerSizes.width + 'px';
