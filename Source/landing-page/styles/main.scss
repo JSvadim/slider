@@ -16,6 +16,10 @@ body {
 
 
 // slider basic styles start
+.gallery-dot {
+    width: 15px;
+    height: 15px;
+}
 .gallery-arrow {
     width: 50px;
     height: 50px;
@@ -211,11 +215,17 @@ body {
         padding: 0 15px 0 0;
     }
     &__item {
+        margin: 0 0 80px 0;
+        &:last-child {
+            margin: 0 0 96px 0;
+        }
         &-title {
             font-family: "Montserrat-Semibold";
             font-size: 25px;
             line-height: 1.2em;
+            letter-spacing: 0.1em;
             text-align: center;
+            text-transform: uppercase;
             margin: 0 0 31px 0;
         }
         &-slider {
@@ -223,8 +233,9 @@ body {
             max-width: 345px;
             height: 202px;
             padding: 3px;
-            background-color: white;
+            margin: 0 auto 31px auto;
             position: relative;
+            background-color: white;
         }
         &-slider .gallery-wrapper {
             width: 100%;
@@ -253,16 +264,46 @@ body {
             background-color: var(--dark);
         }
         &-slider--space-between {
-            margin: 0 auto 31px auto;
             & .gallery-arrow-prev {
                 top: 50%;
-                left: 23px;
+                left: 16px;
                 transform: translate(0, -50%) rotateZ(-90deg);
             }
             & .gallery-arrow-next {
                 top: 50%;
-                right: 23px;
+                right: 16px;
                 transform: translate(0, -50%) rotateZ(90deg);
+            }
+        }
+        &-slider--vertical-align {
+            & .gallery-arrow-prev {
+                top: 28px;
+                right: 16px;
+            }
+            & .gallery-arrow-next {
+                bottom: 28px;
+                right: 16px;
+                transform: rotateZ(180deg);
+            }
+        }
+        &-slider--dots {
+            margin: 0 auto 72px auto;
+            & .gallery-dots {
+                bottom: -41px;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+            & .gallery-dot {
+                margin-right: 20px;
+            }
+            & .gallery-dot:last-child {
+                margin-right: 0px;
+            }
+            & .gallery-dot::before {
+                background-color: white;
+            }
+            & .gallery-dot.gallery-dot-active::before {
+                background-color: var(--gray);
             }
         }
     }
@@ -337,6 +378,63 @@ body {
     }
     .demos {
         position: relative;
+        &__title {
+            transform: translateY(calc(-100% - 12px));
+            margin: 0 0 26px 0;
+            padding: 0 25px 0 0;
+        }
+        &__item {
+            margin: 0 0 90px 0;
+            &:last-child {
+                width: 400px;
+                margin: 0 0 100px 0;
+            }
+            &-title {
+                margin: 0 0 40px 0;
+            }
+            &-slider {
+                width: 400px;
+                max-width: initial;
+                padding: 10px;
+            }
+            &-code {
+                width: 400px;
+                max-width: initial;
+            }
+            &-slide-inner {
+                font-size: 73px;
+            }
+            &-slider--space-between {
+                & .gallery-arrow-prev {
+                    top: 50%;
+                    left: -40px;
+                    transform: translate(-100%, -50%) rotateZ(-90deg);
+                }
+                & .gallery-arrow-next {
+                    top: 50%;
+                    right: -40px;
+                    transform: translate(100%, -50%) rotateZ(90deg);
+                }
+            }
+            &-slider--vertical-align {
+                & .gallery-arrow-prev {
+                    top: 0px;
+                    right: -40px;
+                    transform: translate(100%, 0);
+                }
+                & .gallery-arrow-next {
+                    bottom: 0px;
+                    right: -40px;
+                    transform: translate(100%, 0) rotateZ(180deg);
+                }
+            }
+            &-slider--dots {
+                margin: 0 auto 75px auto;
+                & .gallery-dots {
+                    bottom: -28px;
+                }
+            }
+        }
     }
 }
 @media(min-width: 1200px) {
@@ -466,6 +564,55 @@ body {
             }
         }
     }
+    .section-title {
+        font-size: 60px;
+    }
+    .demos {
+        &__title {
+            transform: translateY(-100%);
+            padding: 0 60px 0 0;
+            margin: 0 0 6.5px 0;
+        }
+        &__item {
+            &:last-child {
+                width: 486px;
+                margin: 0 0 115px 0;
+            }
+            &-title {
+                font-size: 30px;
+                line-height: 37px;
+                margin: 0 0 30px 0;
+            }
+            &-slider {
+                width: 486px;
+                height: 270px;
+            }
+            &-slider--space-between {
+                & .gallery-arrow-prev {
+                    left: -70px;
+                }
+                & .gallery-arrow-next {
+                    right: -70px;
+                }
+            }
+            &-slider--vertical-align {
+                & .gallery-arrow-prev {
+                    right: -70px;
+                }
+                & .gallery-arrow-next {
+                    right: -70px;
+                }
+            }
+            &-slider--dots {
+                & .gallery-dot {
+                    margin-right: 15px;
+                }
+            }
+            &-code {
+                width: 486px;
+            }
+        }
+    }
 }
 @media(min-width: 1400px) {
     .container {
@@ -536,6 +683,33 @@ body {
             }
             &::after {
                 bottom: -305px;
+            }
+        }
+    }
+    .demos {
+        &__title {
+            padding: 0 91px 0 0;
+            margin: 0 0 13.5px 0;
+        }
+        &__item {
+            margin: 0 0 85px 0;
+            &:last-child {
+                margin: 0 0 130px 0;
+            }
+            &-slider {
+                margin: 0 auto 40px auto;
+            }
+            &-slider--dots {
+                margin: 0 0 80px 0;
+                & .gallery-dots {
+                    bottom: -30px;
+                }
+            }
+            &-title {
+                margin: 0 0 40px 0;
+            }
+            &-code {
+                height: 270px;
             }
         }
     }
