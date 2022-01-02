@@ -206,13 +206,12 @@ body {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     opacity: 0.5;
+    padding: 0 15px 0 0;
 }
 .demos {
-    padding: 0 15px;
     &__title {
         text-align: right;
         margin: 0 0 60px 0;
-        padding: 0 15px 0 0;
     }
     &__item {
         margin: 0 0 80px 0;
@@ -226,7 +225,8 @@ body {
             letter-spacing: 0.1em;
             text-align: center;
             text-transform: uppercase;
-            margin: 0 0 31px 0;
+            margin: 0 auto 31px auto;
+            max-width: 355px;
         }
         &-slider {
             width: 100%;
@@ -308,6 +308,63 @@ body {
         }
     }
 }
+.options {
+    background-color: var(--orange);
+    padding: 40px 0 96px 0;
+    &__title {
+        text-align: right;
+        margin: 0 0 40px 0;
+    }
+    &__item {
+        background-color: var(--blue);
+        border-radius: 20px;
+        padding: 25px;
+        margin: 0 auto 50px auto;
+        max-width: 400px;
+        &:last-child {
+            margin: 0 auto 0 auto;
+        }
+    }
+}
+.option {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: "Montserrat-SemiBold";
+    font-size: 16px;
+    line-height: 1.25em;
+    letter-spacing: 0.1em;
+    color: var(--textCol);
+    &__key {
+        flex: 0 0 95px;
+        height: 1.25em;
+        position: relative;
+        &::before {
+            content: ':';
+            display: block;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -48%);
+        }
+        &-1::before {
+            left: 54px;
+        }
+        &-2::before {
+            left: 44px;
+        }
+        &-3::before {
+            left: 71px;
+        }
+    }
+    &__value {
+        flex: 1 1 calc(100% - 96px);
+        width: calc(100% - 96px);
+        word-break: break-all;
+        margin: 0 0 12px 0;
+        &--without-margin {
+            margin: 0;
+        }
+    }
+}
 
 @media(min-width: 768px) {
     .container {
@@ -320,8 +377,7 @@ body {
         min-height: 500px;
         max-height: 600px;
         &::before {
-            right: 480px;
-            left: initial;
+            left: -395px;
             transform: translate(0, -297px);
         }
         &__logo {
@@ -336,8 +392,8 @@ body {
             }
         }
         &__right-part {
-            flex: 0 0 374px;
             display: flex;
+            flex: 1 1 auto;
             flex-direction: column;
             justify-content: center;
             padding: 0;
@@ -357,7 +413,7 @@ body {
             }
         }
         &__left-part {
-            flex: 1 1 auto;
+            flex: 0 0 394px;
         }
         &__top-slider {
             position: absolute;
@@ -376,12 +432,14 @@ body {
             }
         }
     }
+    .section-title {
+        padding: 0 25px 0 0;
+    }
     .demos {
         position: relative;
         &__title {
             transform: translateY(calc(-100% - 12px));
             margin: 0 0 26px 0;
-            padding: 0 25px 0 0;
         }
         &__item {
             margin: 0 0 90px 0;
@@ -390,7 +448,7 @@ body {
                 margin: 0 0 100px 0;
             }
             &-title {
-                margin: 0 0 40px 0;
+                margin: 0 auto 40px auto;
             }
             &-slider {
                 width: 400px;
@@ -434,6 +492,32 @@ body {
                     bottom: -28px;
                 }
             }
+        }
+    }
+    .options {
+        position: relative;
+        padding: 0 0 100px 0;
+        &__title {
+            position: relative;
+            z-index: 2;
+            transform: translate(0, -100%);
+        }
+        &__list {
+            position: relative;
+            z-index: 2;
+        }
+        &__decoration {
+            position: absolute;
+            top: 143px;
+            left: 324px;
+            width: 1022px;
+            height: 1034px;
+            background: url('../img/Options-triangle.svg') 0 0 / 100% 100% no-repeat;
+            transform: translate(0, -100%);
+        }
+        &__item {
+            max-width: 536px;
+            padding: 25px 25px 25px 40px;
         }
     }
 }
@@ -566,11 +650,11 @@ body {
     }
     .section-title {
         font-size: 60px;
+        padding: 0 60px 0 0;
     }
     .demos {
         &__title {
             transform: translateY(-100%);
-            padding: 0 60px 0 0;
             margin: 0 0 6.5px 0;
         }
         &__item {
@@ -581,7 +665,8 @@ body {
             &-title {
                 font-size: 30px;
                 line-height: 37px;
-                margin: 0 0 30px 0;
+                max-width: 475px;
+                margin: 0 auto 31px auto;
             }
             &-slider {
                 width: 486px;
@@ -610,6 +695,52 @@ body {
             }
             &-code {
                 width: 486px;
+                height: 270px;
+            }
+        }
+    }
+    .options {
+        &__title {
+            margin: 0;
+        }
+        padding: 0 0 100px 0;
+        &__decoration {
+            width: 1712px;
+            height: 1733px;
+            left: 467px;
+            top: 250px;
+        }
+        &__list {
+            padding: 50px 0 0px 0;
+        }
+        &__item {
+            padding: 40px;
+            max-width: 760px;
+            margin: 0 auto 70px auto;
+            &:last-child {
+                margin: 0 auto 0 auto;
+            }
+        }
+    }
+    .option {
+        font-size: 22px;
+        &__key {
+            flex: 0 0 154px;
+            &-1::before {
+                left: 75px;
+            }
+            &-2::before {
+                left: 60px;
+            }
+            &-3::before {
+                left: 97px;
+            }
+        }
+        &__value {
+            flex: 1 1 calc(100% - 154px);
+            margin: 0 0 26px 0;
+            &--without-margin {
+                margin: 0;
             }
         }
     }
@@ -686,6 +817,9 @@ body {
             }
         }
     }
+    .section-title {
+        padding: 0 91px 0 0;
+    }
     .demos {
         &__title {
             padding: 0 91px 0 0;
@@ -706,11 +840,17 @@ body {
                 }
             }
             &-title {
-                margin: 0 0 40px 0;
+                margin: 0 auto 40px auto;
             }
-            &-code {
-                height: 270px;
-            }
+        }
+    }
+    .options {
+        &__decoration {
+            top: 200px;
+            left: 676px;
+        }
+        &__list {
+            padding: 55.5px 0 0px 0;
         }
     }
 }
