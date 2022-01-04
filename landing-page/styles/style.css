@@ -161,6 +161,14 @@ body {
   opacity: 0.5;
 }
 
+.logo__big {
+  font-family: "Redressed";
+}
+.logo__small {
+  font-family: "Montserrat-SemiBold";
+  text-transform: uppercase;
+}
+
 .first-screen {
   position: relative;
   background-color: var(--orange);
@@ -190,14 +198,11 @@ body {
   margin: 0 0 37px 0;
 }
 .first-screen__logo-big {
-  font-family: "Redressed";
   font-size: 50px;
   line-height: 1em;
 }
 .first-screen__logo-small {
-  font-family: "Montserrat-SemiBold";
   font-size: 11px;
-  text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 .first-screen__top-slider {
@@ -490,6 +495,69 @@ body {
   margin: 0;
 }
 
+.get-it {
+  background-color: var(--textCol);
+}
+.get-it__inner {
+  padding: 34px 19px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.get-it__logo {
+  color: var(--blue);
+  text-align: center;
+  transform: translateX(1px);
+}
+.get-it__logo-big {
+  font-size: 70px;
+}
+.get-it__logo-small {
+  font-size: 16px;
+  line-height: 1.25em;
+  letter-spacing: 0.06em;
+}
+.get-it__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 0 37px 0;
+}
+.get-it__button {
+  text-align: left;
+  padding: 0 0 0 20px;
+  border-radius: 20px;
+  height: 50px;
+  width: 100%;
+  max-width: 307px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.222em;
+  letter-spacing: 0.1em;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.get-it__button:first-child {
+  margin: 0 0 31px 0;
+}
+.get-it__button-view-on-github {
+  display: inline-block;
+  border: 2px solid var(--blue);
+  color: var(--blue);
+  text-decoration: underline;
+}
+.get-it__button-hire {
+  color: var(--textCol);
+  background-color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+}
+.get-it__button-hire-decor {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  margin: 0 0 0 24px;
+  background: url("../img/icons/hire-btn.svg") 0 0/100% 100%;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 720px;
@@ -642,6 +710,21 @@ body {
   .options__item {
     max-width: 536px;
     padding: 25px 25px 25px 40px;
+  }
+
+  .get-it__inner {
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    padding: 57.5px 0px;
+    transform: translateX(30px);
+  }
+  .get-it__logo {
+    margin: 0 0 0 37px;
+  }
+  .get-it__button {
+    padding: 0 20px;
+    white-space: nowrap;
   }
 }
 @media (min-width: 1200px) {
@@ -860,6 +943,37 @@ body {
   }
   .option__value--without-margin {
     margin: 0;
+  }
+
+  .get-it__inner {
+    align-items: flex-end;
+    transform: initial;
+  }
+  .get-it__logo {
+    flex: 0 0 calc(50% - 70px);
+    margin: 0;
+    text-align: right;
+  }
+  .get-it__buttons {
+    margin: 0;
+    flex: 0 0 calc(50% + 70px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .get-it__button {
+    font-size: 27px;
+    width: 450px;
+    height: 76px;
+    max-width: initial;
+  }
+  .get-it__button-hire-decor {
+    width: 50px;
+    height: 50px;
+    margin: 0 0 0 40px;
+  }
+  .get-it__button:first-child {
+    margin: 0 0 40px 0;
   }
 }
 @media (min-width: 1400px) {

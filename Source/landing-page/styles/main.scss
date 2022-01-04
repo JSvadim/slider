@@ -31,7 +31,15 @@ body {
 }
 // slider basic styles end
 
-
+.logo {
+    &__big {
+        font-family: "Redressed";
+    }
+    &__small {
+        font-family: "Montserrat-SemiBold";
+        text-transform: uppercase;
+    }
+}
 .first-screen {
     position: relative;
     background-color: var(--orange);
@@ -60,14 +68,11 @@ body {
         display: inline-block;
         margin: 0 0 37px 0;
         &-big {
-            font-family: "Redressed";
             font-size: 50px;
             line-height: 1em;
         }
         &-small {
-            font-family: "Montserrat-SemiBold";
             font-size: 11px;
-            text-transform: uppercase;
             letter-spacing: 0.06em;
         }
     }
@@ -365,6 +370,68 @@ body {
         }
     }
 }
+.get-it {
+    background-color: var(--textCol);
+    &__inner {
+        padding: 34px 19px;
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    &__logo {
+        color: var(--blue);
+        text-align: center;
+        transform: translateX(1px);
+        &-big {
+            font-size: 70px;
+        }
+        &-small {
+            font-size: 16px;
+            line-height: 1.25em;
+            letter-spacing: 0.06em;
+        }
+    }
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 0 37px 0;
+    }
+    &__button {
+        text-align: left;
+        padding: 0 0 0 20px;
+        border-radius: 20px;
+        height: 50px;
+        width: 100%;
+        max-width: 307px;
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.222em;
+        letter-spacing: 0.1em;  
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        &:first-child {
+            margin: 0 0 31px 0;
+        }
+        &-view-on-github {
+            display: inline-block;
+            border: 2px solid var(--blue);
+            color: var(--blue);
+            text-decoration: underline;
+        }
+        &-hire {
+            color: var(--textCol);
+            background-color: var(--blue);
+            display: inline-flex;
+            align-items: center;
+            &-decor {
+                width: 28px;
+                height: 28px;
+                display: inline-block;
+                margin: 0 0 0 24px;
+                background: url("../img/icons/hire-btn.svg") 0 0 / 100% 100%;
+            }
+        }
+    }
+}
 
 @media(min-width: 768px) {
     .container {
@@ -518,6 +585,22 @@ body {
         &__item {
             max-width: 536px;
             padding: 25px 25px 25px 40px;
+        }
+    }
+    .get-it {
+        &__inner {
+            flex-direction: row-reverse;
+            justify-content: center;
+            align-items: center;
+            padding: 57.5px 0px;
+            transform: translateX(30px);
+        }
+        &__logo {
+            margin: 0 0 0 37px;
+        }
+        &__button {
+            padding: 0 20px;
+            white-space: nowrap;
         }
     }
 }
@@ -741,6 +824,40 @@ body {
             margin: 0 0 26px 0;
             &--without-margin {
                 margin: 0;
+            }
+        }
+    }
+    .get-it {
+        &__inner {
+            align-items: flex-end;
+            transform: initial;
+        }
+        &__logo {
+            flex: 0 0 calc(50% - 70px);
+            margin: 0;
+            text-align: right;
+        }
+        &__buttons {
+            margin: 0;
+            flex: 0 0 calc(50% + 70px);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        &__button {
+            font-size: 27px;
+            width: 450px;
+            height: 76px;
+            max-width: initial;
+            &-hire {
+                &-decor {
+                    width: 50px;
+                    height: 50px;
+                    margin: 0 0 0 40px;
+                }
+            }
+            &:first-child {
+                margin: 0 0 40px 0;
             }
         }
     }
