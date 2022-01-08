@@ -101,9 +101,18 @@
                                 </div>
                             </div>
                             <div class="demos__item-code">
-                                <p class="demos__item-code-inner">
-        
-                                </p>
+                                <div class="code-outer">
+                                    <p class="demos__item-code-inner code">
+                                        <span class="code__keyword">const</span> 
+                                        <span class="code__name">sliderSpaceBetween</span> = 
+                                        <span class="code__keyword">new</span> 
+                                        <span class="code__name">Gallery</span>(
+                                        <span class="code__text">"#sliderSelector"</span>, { </br>
+                                        <span class="code__tab"></span><span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__number">20</span>,</br>
+                                        <span class="code__tab"></span><span class="code__obj-key">arrows</span>: <span class="code__boolean">true</span>,</br>
+                                        });
+                                    </p>
+                                </div>
                             </div>
                         </section>
                         <section class="demos__item">
@@ -123,9 +132,19 @@
                                 </div>
                             </div>
                             <div class="demos__item-code">
-                                <p class="demos__item-code-inner">
-        
-                                </p>
+                                <div class="code-outer">
+                                    <p class="demos__item-code-inner code">
+                                        <span class="code__keyword">const</span> 
+                                        <span class="code__name">sliderVerticalAlign</span> = 
+                                        <span class="code__keyword">new</span> 
+                                        <span class="code__name">Gallery</span>(
+                                        <span class="code__text">"#sliderSelector"</span>, { </br>
+                                        <span class="code__tab"></span><span class="code__obj-key">vertical</span>: <span class="code__obj-boolean">true</span>,</br>
+                                        <span class="code__tab"></span><span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-number">30</span>,</br>
+                                        <span class="code__tab"></span><span class="code__obj-key">arrows</span>: <span class="code__obj-boolean">true</span>,</br>
+                                        });
+                                    </p>
+                                </div>
                             </div>
                         </section>
                         <section class="demos__item demos__item--left">
@@ -145,9 +164,18 @@
                                 </div>
                             </div>
                             <div class="demos__item-code">
-                                <p class="demos__item-code-inner">
-        
-                                </p>
+                                <div class="code-outer">
+                                    <p class="demos__item-code-inner code">
+                                        <span class="code__keyword">const</span> 
+                                        <span class="code__name">sliderDots</span> = 
+                                        <span class="code__keyword">new</span> 
+                                        <span class="code__name">Gallery</span>(
+                                        <span class="code__text">"#sliderSelector"</span>, { </br>
+                                        <span class="code__tab"></span><span class="code__obj-key">dots</span>: <span class="code__obj-boolean">true</span>,</br>
+                                        <span class="code__tab"></span><span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-number">20</span>,</br>
+                                        });
+                                    </p>
+                                </div>
                             </div>
                         </section>
                     </div>
@@ -254,9 +282,31 @@
                                     Prepare HTML markup
                                 </h3>
                                 <div class="get-started__action-code-field">
-                                    <p class="code">
-
-                                    </p>
+                                    <div class="code-outer">
+                                        <p class="code">
+                                            <span class="code__tag">&ltdiv</span>
+                                            <span class="code__keyword">class</span> =
+                                            <span class="code__text">"slider-selector"</span>
+                                            <span class="code__tag">&gt</span></br>
+                                                <span class="code__tab"></span>    
+                                                <span class="code__tag">&ltdiv&gt</span>
+                                                slide
+                                                <span class="code__tag">&lt/div&gt</span></br>
+                                                <span class="code__tab"></span>    
+                                                <span class="code__tag">&ltdiv&gt</span>
+                                                slide
+                                                <span class="code__tag">&lt/div&gt</span></br>
+                                                <span class="code__tab"></span>    
+                                                <span class="code__tag">&ltdiv&gt</span>
+                                                slide
+                                                <span class="code__tag">&lt/div&gt</span></br>
+                                                <span class="code__tab"></span>    
+                                                <span class="code__tag">&ltdiv&gt</span>
+                                                slide
+                                                <span class="code__tag">&lt/div&gt</span></br>
+                                            <span class="code__tag">&lt/div&gt</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -267,9 +317,71 @@
                                     Add slider in a "head" tag
                                 </h3>
                                 <div class="get-started__action-code-field">
-                                    <p class="code">
+                                    <div class="code-outer">
+                                        <p class="code">
+                                            <span class="code__tag">&lthead&gt</span></br>
+                                                <!-- tag start -->
+                                                <span class="code__tab"></span>
+                                                <span class="code__tag">&lttitle&gt</span>
+                                                    Webpage name
+                                                <span class="code__tag">&lt/title&gt</span></br>
+                                                <!-- tag end -->
 
-                                    </p>
+                                                <!-- tag start -->
+                                                <span class="code__tab"></span>
+                                                <span class="code__comment">&lt!-- at first add slider basic styles and js --!&gt</span></br>
+                                                <!-- tag end -->
+
+                                                <!-- tag start -->
+                                                <span class="code__tab"></span>
+                                                <span class="code__tag">&ltlink</span> 
+                                                <span class="code__keyword">rel</span> = 
+                                                <span class="code__text">"stylesheet"</span> 
+                                                <span class="code__keyword">type</span> = 
+                                                <span class="code__text">"text/css"</span> 
+                                                <span class="code__keyword">href</span> = 
+                                                <span class="code__text">"sliderLib.min.css"</span> 
+                                                <span class="code__tag">/&gt</span></br>
+                                                <!-- tag end -->
+
+                                                <!-- tag start -->
+                                                <span class="code__tab"></span>
+                                                <span class="code__tag">&ltlink</span> 
+                                                <span class="code__keyword">rel</span> = 
+                                                <span class="code__text">"stylesheet"</span> 
+                                                <span class="code__keyword">type</span> = 
+                                                <span class="code__text">"text/css"</span> 
+                                                <span class="code__keyword">href</span> = 
+                                                <span class="code__text">"yourStyle.css"</span> 
+                                                <span class="code__tag">/&gt</span></br>
+                                                <!-- tag end -->
+
+                                                <!-- tag start -->
+                                                <span class="code__tab"></span>
+                                                <span class="code__tag">&ltscript</span> 
+                                                <span class="code__keyword">defer</span> 
+                                                <span class="code__keyword">src</span> = 
+                                                <span class="code__text">"sliderLib.js"</span>
+                                                <span class="code__tag">&lt/script&gt</span></br>
+                                                <!-- tag end -->
+
+                                                <!-- tag start -->
+                                                <span class="code__tab"></span>
+                                                <span class="code__comment">&lt!-- initialize slider in your script --!&gt</span></br>
+                                                <!-- tag end -->
+
+                                                <!-- tag start -->
+                                                <span class="code__tab"></span>
+                                                <span class="code__tag">&ltscript</span> 
+                                                <span class="code__keyword">defer</span> 
+                                                <span class="code__keyword">src</span> = 
+                                                <span class="code__text">"yourScript.js"</span>
+                                                <span class="code__tag">&lt/script&gt</span></br>
+                                                <!-- tag end -->
+
+                                            <span class="code__tag">&lt/head&gt</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -280,9 +392,21 @@
                                     Initialize slider in your script file
                                 </h3>
                                 <div class="get-started__action-code-field">
-                                    <p class="code">
-
-                                    </p>
+                                    <div class="code-outer">
+                                        <p class="code">
+                                            <!-- tag start -->
+                                            <span class="code__comment">&lt!-- in your script file --!&gt</span></br>
+                                            <!-- tag end -->
+                                            <span class="code__keyword">const</span> 
+                                            <span class="code__name">slider</span> = 
+                                            <span class="code__keyword">new</span> 
+                                            <span class="code__name">Gallery</span>(
+                                            <span class="code__text">".slider-selector"</span>, { </br>
+                                            <span class="code__tab"></span><span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-val">20</span>,</br>
+                                            <span class="code__tab"></span><span class="code__obj-key">arrows</span>: <span class="code__obj-val">true</span>,</br>
+                                            });
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </section>

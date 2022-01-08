@@ -253,6 +253,45 @@ body {
     opacity: 0.5;
     padding: 0 15px 0 0;
 }
+.code-outer {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+.code {
+    white-space: nowrap;
+    font-family: "Roboto-Regular";
+    font-size: 16px;
+    line-height: 1.45em;
+    letter-spacing: 0.08em;
+    padding: 0 15px 15px 0;
+    display: inline-block;
+    &__tab {
+        display: inline-block;
+        width: 30px;
+    }
+    &__keyword {
+        color: #5DB0D7;
+    }
+    &__obj-key {
+        color: #7DDCFE;
+    }
+    &__text {
+        color: #D1977F;
+    }
+    &__number {
+        color: #93CEA8;
+    }
+    &__boolean {
+        color: var(--blue);
+    }
+    &__comment {
+        color: #6A9955;
+    }
+    &__tag {
+        color: var(--orange);
+    }
+}
 .demos {
     &__title {
         text-align: right;
@@ -307,6 +346,7 @@ body {
             height: 202px;
             margin: 0 auto;
             background-color: var(--dark);
+            padding: 15px;
         }
         &-slider--space-between {
             & .gallery-arrow-prev {
@@ -521,6 +561,7 @@ body {
             height: 183px;
             background: var(--dark);
             border: 3px solid var(--blue);
+            padding: 20px;
         }
     }
 }
