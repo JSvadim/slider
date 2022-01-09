@@ -27,11 +27,41 @@ body {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: url("../img/icons/slider-arrow.svg") 0% 0% / 100% 100%;
-    transition: all 0.5s;
-}
-.gallery-arrow.gallery-arrow-disabled {
-    opacity: 0.5;
+    background-color: initial;
+    &.gallery-arrow-clicked {
+        animation: initial;
+    }
+    &.gallery-arrow-clicked::after {
+        animation: "arrow-pulse" 1s 0s;
+    }
+    &.gallery-arrow-clicked::before {
+        animation: "arrow-pulse--before" 1s 0s;
+    }
+    &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 60%;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        background-color: transparent;
+        border-radius: 50%;
+        border: 2px solid var(--textCol);
+    }
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: url("../img/icons/slider-arrow.svg") 0% 0% / 100% 100%;
+        transition: all 0.5s;
+    }
 }
 // slider basic styles end
 
@@ -366,10 +396,12 @@ body {
         }
         &-slider--vertical-align {
             & .gallery-arrow-prev {
+                left: initial;
                 top: 28px;
                 right: 16px;
             }
             & .gallery-arrow-next {
+                top: initial;
                 bottom: 28px;
                 right: 16px;
                 transform: rotateZ(180deg);
@@ -669,25 +701,21 @@ body {
             &-slider--space-between {
                 & .gallery-arrow-prev {
                     top: 50%;
-                    left: -40px;
-                    transform: translate(-100%, -50%) rotateZ(-90deg);
+                    left: -90px;
                 }
                 & .gallery-arrow-next {
                     top: 50%;
-                    right: -40px;
-                    transform: translate(100%, -50%) rotateZ(90deg);
+                    right: -90px;
                 }
             }
             &-slider--vertical-align {
                 & .gallery-arrow-prev {
                     top: 0px;
-                    right: -40px;
-                    transform: translate(100%, 0);
+                    right: -90px;
                 }
                 & .gallery-arrow-next {
                     bottom: 0px;
-                    right: -40px;
-                    transform: translate(100%, 0) rotateZ(180deg);
+                    right: -90px;
                 }
             }
             &-slider--dots {
@@ -1205,6 +1233,21 @@ body {
                 padding: 0 140px 0 0;
             }
         }
+    }
+}
+
+@keyframes arrow-pulse--before {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+    20% {
+        transform: translate(-50%, -50%) scale(3);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
     }
 }
 

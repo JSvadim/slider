@@ -61,7 +61,6 @@
   top: 50%;
   width: 50px;
   height: 50px;
-  transform: translate(0, -50%);
   transition: all 0.5s;
   background-color: aqua;
 }
@@ -129,24 +128,24 @@
 
 @-webkit-keyframes arrow-pulse {
   0% {
-    transform: translate(0, -50%);
+    transform: scale(1);
   }
   20% {
-    transform: translate(0, -50%) scale(0.6);
+    transform: scale(0.6);
   }
   100% {
-    transform: translate(0, -50%);
+    transform: scale(1);
   }
 }
 
 @keyframes arrow-pulse {
   0% {
-    transform: translate(0, -50%);
+    transform: scale(1);
   }
   20% {
-    transform: translate(0, -50%) scale(0.6);
+    transform: scale(0.6);
   }
   100% {
-    transform: translate(0, -50%);
+    transform: scale(1);
   }
 }
