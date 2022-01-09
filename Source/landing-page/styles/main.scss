@@ -288,8 +288,8 @@ body {
     padding: 0 15px 0 0;
 }
 .code-outer {
-    height: 100%;
     width: 100%;
+    height: 100%;
     overflow: auto;
 }
 .code {
@@ -298,8 +298,8 @@ body {
     font-size: 16px;
     line-height: 1.45em;
     letter-spacing: 0.08em;
-    padding: 0 15px 15px 0;
     display: inline-block;
+    padding: 20px;
     &__tab {
         display: inline-block;
         width: 30px;
@@ -380,7 +380,7 @@ body {
             height: 202px;
             margin: 0 auto;
             background-color: var(--dark);
-            padding: 15px;
+            overflow: auto;
         }
         &-slider--space-between {
             & .gallery-arrow-prev {
@@ -529,7 +529,8 @@ body {
             margin: 0 0 31px 0;
         }
         &-view-on-github {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             border: 2px solid var(--blue);
             color: var(--blue);
             text-decoration: underline;
@@ -597,7 +598,6 @@ body {
             height: 183px;
             background: var(--dark);
             border: 3px solid var(--blue);
-            padding: 20px;
         }
     }
 }
