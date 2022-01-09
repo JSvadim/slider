@@ -109,7 +109,7 @@
         pointer-events: none;
     }
     &.gallery-dot-active::before {
-        background-color: rgb(83, 181, 214);
+    background-color: aqua;
     }
     &:last-child {
         margin-right: 0;

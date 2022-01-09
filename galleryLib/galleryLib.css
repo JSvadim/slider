@@ -120,7 +120,7 @@
   pointer-events: none;
 }
 .gallery-dot.gallery-dot-active::before {
-  background-color: #53b5d6;
+  background-color: aqua;
 }
 .gallery-dot:last-child {
   margin-right: 0;
