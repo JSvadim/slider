@@ -87,6 +87,7 @@ class Gallery {
         this.containerSizes = this.galleryWrapper.getBoundingClientRect();
         this.size = this.slideNodes.length;
         let lineNodePosition;
+        this.slideNodes.forEach(slide => slide.style.overflow = 'hidden');
         if(!this.settings.vertical) {
             this.lineNode.style.width = ((this.containerSizes.width * this.size) + this.settings.spaceBetweenSlides * this.size) + 'px'
             this.slideNodes.forEach(slide => {
