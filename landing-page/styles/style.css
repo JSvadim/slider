@@ -942,8 +942,8 @@ body.lock {
   .first-screen {
     display: flex;
     height: 100vh;
-    min-height: 500px;
-    max-height: 600px;
+    min-height: 540px;
+    max-height: 820px;
   }
   .first-screen::before {
     left: -395px;
@@ -1165,6 +1165,7 @@ body.lock {
   }
   .header__menu-list {
     flex-direction: row;
+    overflow: hidden;
   }
   .header__menu-item {
     margin: 0 65.7px 0 0;
@@ -1179,9 +1180,8 @@ body.lock {
   }
 
   .first-screen {
-    height: 850px;
-    min-height: initial;
-    max-height: initial;
+    min-height: 800px;
+    max-height: 950px;
   }
   .first-screen::before {
     width: 863px;
@@ -1496,7 +1496,9 @@ body.lock {
   }
 
   .first-screen {
-    height: 1024px;
+    height: 100vh;
+    max-height: 1200px;
+    min-height: 1000px;
   }
   .first-screen__logo {
     left: 60px;

@@ -811,8 +811,8 @@ body {
     .first-screen {
         display: flex;
         height: 100vh;
-        min-height: 500px;
-        max-height: 600px;
+        min-height: 540px;
+        max-height: 820px;
         &::before {
             left: -395px;
             transform: translate(0, -297px);
@@ -1038,6 +1038,7 @@ body {
             z-index: 4;
             &-list {
                 flex-direction: row;
+                overflow: hidden;
             }
             &-item {
                 margin: 0 65.7px 0 0;
@@ -1055,9 +1056,8 @@ body {
         }
     }
     .first-screen {
-        height: 850px;
-        min-height: initial;
-        max-height: initial;
+        min-height: 800px;
+        max-height: 950px;
         &::before {
             width: 863px;
             height: 863px;
@@ -1373,7 +1373,9 @@ body {
         }
     }
     .first-screen {
-        height: 1024px;
+        height: 100vh;
+        max-height: 1200px;
+        min-height: 1000px;
         &__logo {
             left: 60px;
             top: 24px;
