@@ -365,12 +365,8 @@ class Gallery {
     }
 
     createDivForScreenReader() {
-        let containerForScreenReaderDivs = document.querySelector('.screenReaderDivsContainer');
-        if(!containerForScreenReaderDivs) {
-            containerForScreenReaderDivs = document.createElement('div');
-            containerForScreenReaderDivs.classList.add('screenReaderDivsContainer');
-            document.body.appendChild(containerForScreenReaderDivs);
-        }
+        this.screenReaderDiv = document.querySelector('.screen-reader-div');
+        if(this.screenReaderDiv) return;
         this.screenReaderDiv = document.createElement("div");
         this.screenReaderDiv.style.position = 'fixed';
         this.screenReaderDiv.style.width = '0px';
@@ -380,8 +376,9 @@ class Gallery {
         this.screenReaderDiv.style.overflow = 'hidden';
         this.screenReaderDiv.style.border = 'none';
         this.screenReaderDiv.style.fontSize = '0px';
-        containerForScreenReaderDivs.appendChild(this.screenReaderDiv);
+        this.screenReaderDiv.className = 'screen-reader-div';
         this.screenReaderDiv.setAttribute('aria-live', 'assertive');
+        document.body.appendChild(this.screenReaderDiv);
     }
 
     screenReaderTellsActiveSlideContent() {
