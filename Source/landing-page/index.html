@@ -13,10 +13,39 @@
 <body>
     <div class="wrapper">
         <header class="header">
-            <!-- it's not time for this -->
+            <div class="container">
+                <div class="header__row">
+                    <div class="header__burger">
+                        <div class="header__burger-decor header__burger-decor-1"></div>
+                        <div class="header__burger-decor header__burger-decor-2"></div>
+                        <div class="header__burger-decor header__burger-decor-3"></div>
+                        <button class="header__burger-btn">Open or close menu</button>
+                    </div>
+                    <P class="header__logo">SliderLIB</P>
+                    <nav class="header__menu">
+                        <ul class="header__menu-list">
+                            <li class="header__menu-item">
+                                <a class="header__menu-link" href="#demos">Demos</a>
+                            </li>
+                            <li class="header__menu-item">
+                                <a class="header__menu-link" href="#options">Options</a>
+                            </li>
+                            <li class="header__menu-item">
+                                <a class="header__menu-link" href="#getIt">Get it</a>
+                            </li>
+                            <li class="header__menu-item">
+                                <a class="header__menu-link" href="#getStarted">Get started</a>
+                            </li>
+                            <li class="header__menu-item">
+                                <a class="header__menu-link" href="#firstSection">Scroll top</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         </header>
         <main class="main">
-            <div class="first-screen">
+            <div class="first-screen" id="firstSection">
                 <div class="first-screen__left-part">
                     <div class="first-screen__logo logo">
                         <h1 class="first-screen__logo-big logo__big">SliderLIB</h1>
@@ -80,7 +109,7 @@
                     </p>
                 </section>
             </div>
-            <section class="demos">
+            <section class="demos" id="demos">
                 <div class="container">
                     <div class="demos__inner">
                         <h2 class="demos__title section-title">demos</h2>
@@ -246,7 +275,7 @@
                     </div>
                 </div>
             </section>
-            <section class="options">
+            <section class="options" id="options">
                 <div class="container">
                     <div class="options__inner">
                         <div class="options__decoration"></div>
@@ -327,7 +356,7 @@
                     </div>
                 </div>
             </section>
-            <section class="get-it">
+            <section class="get-it" id="getIt">
                 <div class="container">
                     <div class="get-it__inner">
                         <div class="get-it__logo logo">
@@ -346,7 +375,7 @@
                     </div>
                 </div>
             </section>
-            <section class="get-started">
+            <section class="get-started" id="getStarted">
                 <div class="container">
                     <div class="get-started__inner">
                         <h2 class="get-started__title section-title">get started</h2>
