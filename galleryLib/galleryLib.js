@@ -304,7 +304,9 @@ class Gallery {
     handleArrowsState() {
         const isLastSlide = this.currentSlide === (this.size - 1);
         const isFirstSlide = this.currentSlide === 0;
-        this[nextArrowName].classList.remove(disabledArrowName);
+        this[nextArrowName].setAttribute('aria-label', 'next slide');
+        this[prevArrowName].setAttribute('aria-label', 'previous slide');
+        /* this[nextArrowName].classList.remove(disabledArrowName);
         this[prevArrowName].classList.remove(disabledArrowName);
         this[nextArrowName].removeAttribute('disabled');
         this[prevArrowName].removeAttribute('disabled');
@@ -315,6 +317,12 @@ class Gallery {
         if(isFirstSlide) {
             this[prevArrowName].setAttribute('disabled', '');
             this[prevArrowName].classList.add(disabledArrowName);
+        } */
+        if(isLastSlide) {
+            return this[nextArrowName].setAttribute('aria-label', 'next slide. It is the last slide')
+        }
+        if(isFirstSlide) {
+            return this[prevArrowName].setAttribute('aria-label', 'previous slide. It is the first slide')
         }
     }
 
