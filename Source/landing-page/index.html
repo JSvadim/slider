@@ -51,7 +51,7 @@
                         <h1 class="first-screen__logo-big logo__big">SliderLIB</h1>
                         <p class="first-screen__logo-small logo__small">DRAGGABLE & TOUCHABLE</p>
                     </div>
-                    <div class="first-screen__top-slider">
+                    <div class="first-screen__top-slider" aria-hidden="true">
                         <div class="first-screen__top-slider-wrapper">
                             <div class="first-screen__top-slider-outer">
                                 <div class="first-screen__top-slider-inner">
@@ -73,13 +73,10 @@
                             </div>
                         </div>
                         <div class="first-screen__top-slider-decor-inside">
-                            <img class="first-screen__top-slider-decor-inside-pic" src="img/icons/touch.svg"
-                                alt="picture of touch">
+                            <div class="first-screen__top-slider-decor-inside-pic"></div>
                         </div>
-                        <img class="first-screen__top-slider-decor-outside-touch" src="img/icons/touch-with-line.svg"
-                            alt="picture of touch again">
-                        <img class="first-screen__top-slider-decor-outside-drag" src="img/icons/click.svg"
-                            alt="picture of mouse click">
+                        <div class="first-screen__top-slider-decor-outside-touch"></div>
+                        <div class="first-screen__top-slider-decor-outside-drag"></div>
                         <div class="first-screen__top-slider-dots">
                             <div class="first-screen__top-slider-dot"></div>
                             <div class="first-screen__top-slider-dot first-screen__top-slider-dot--active"></div>
@@ -88,13 +85,9 @@
                             <div class="first-screen__top-slider-dot"></div>
                         </div>
                     </div>
-                    <div class="first-screen__bottom-slider">
+                    <div class="first-screen__bottom-slider" aria-hidden="true">
                         <div class="first-screen__bottom-slider-body">
-                            <picture>
-                                <source type="image/webp" srcset="img/fake-sliders-pics/second__first.webp">
-                                <img class="first-screen__bottom-slider-img"
-                                    src="img/fake-sliders-pics/second__first.png" alt="example picture 2">
-                            </picture>
+                            <div class="first-screen__bottom-slider-img"></div>
                             <div class="first-screen__bottom-slider-arrow first-screen__bottom-slider-arrow--top"></div>
                             <div class="first-screen__bottom-slider-arrow first-screen__bottom-slider-arrow--bottom">
                             </div>
@@ -129,20 +122,20 @@
                                     <p class="demos__item-slide-number">4</p>
                                 </div>
                             </div>
-                            <div class="demos__item-code">
+                            <div class="demos__item-code" aria-label="javascript code example" role="link">
                                 <div class="code-outer">
                                     <p class="demos__item-code-inner code">
                                         <span class="code__keyword">const</span> 
                                         <span class="code__name">sliderSpaceBetween</span> = 
                                         <span class="code__keyword">new</span> 
                                         <span class="code__name">Gallery</span>(
-                                        <span class="code__text">"#sliderSelector"</span>, { </br>
+                                        <span class="code__text">"#sliderSelector"</span>, { <br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__number">20</span>,</br>
+                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__number">20</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">arrows</span>: <span class="code__boolean">true</span>,</br>
+                                        <span class="code__obj-key">arrows</span>: <span class="code__boolean">true</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">timeBetweenSlides</span>: <span class="code__number">1000</span>,</br>
+                                        <span class="code__obj-key">timeBetweenSlides</span>: <span class="code__number">1000</span>,<br>
                                         });
                                     </p>
                                 </div>
@@ -181,22 +174,22 @@
                                     <p class="demos__item-slide-text">A big bird has a house. Yea, I don't want to think what to type here.</p>
                                 </div>
                             </div>
-                            <div class="demos__item-code">
+                            <div class="demos__item-code" aria-label="javascript code example" role="link">
                                 <div class="code-outer">
                                     <p class="demos__item-code-inner code">
                                         <span class="code__keyword">const</span> 
                                         <span class="code__name">sliderSpaceBetween</span> = 
                                         <span class="code__keyword">new</span> 
                                         <span class="code__name">Gallery</span>(
-                                        <span class="code__text">"#sliderSelector"</span>, { </br>
+                                        <span class="code__text">"#sliderSelector"</span>, { <br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__number">20</span>,</br>
+                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__number">20</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">arrows</span>: <span class="code__boolean">true</span>,</br>
+                                        <span class="code__obj-key">arrows</span>: <span class="code__boolean">true</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">timeBetweenSlides</span>: <span class="code__number">1000</span>,</br>
+                                        <span class="code__obj-key">timeBetweenSlides</span>: <span class="code__number">1000</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">initialSlide</span>: <span class="code__number">2</span>,</br>
+                                        <span class="code__obj-key">initialSlide</span>: <span class="code__number">2</span>,<br>
                                         });
                                     </p>
                                 </div>
@@ -218,22 +211,22 @@
                                     <p class="demos__item-slide-number">4</p>
                                 </div>
                             </div>
-                            <div class="demos__item-code">
+                            <div class="demos__item-code" aria-label="javascript code example" role="link">
                                 <div class="code-outer">
                                     <p class="demos__item-code-inner code">
                                         <span class="code__keyword">const</span> 
                                         <span class="code__name">sliderVerticalAlign</span> = 
                                         <span class="code__keyword">new</span> 
                                         <span class="code__name">Gallery</span>(
-                                        <span class="code__text">"#sliderSelector"</span>, { </br>
+                                        <span class="code__text">"#sliderSelector"</span>, { <br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">vertical</span>: <span class="code__obj-boolean">true</span>,</br>
+                                        <span class="code__obj-key">vertical</span>: <span class="code__obj-boolean">true</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-number">30</span>,</br>
+                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-number">30</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">arrows</span>: <span class="code__obj-boolean">true</span>,</br>
+                                        <span class="code__obj-key">arrows</span>: <span class="code__obj-boolean">true</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">timeBetweenSlides</span>: <span class="code__number">1000</span>,</br>
+                                        <span class="code__obj-key">timeBetweenSlides</span>: <span class="code__number">1000</span>,<br>
                                         });
                                     </p>
                                 </div>
@@ -255,18 +248,18 @@
                                     <p class="demos__item-slide-number">4</p>
                                 </div>
                             </div>
-                            <div class="demos__item-code">
+                            <div class="demos__item-code" aria-label="javascript code example" role="link">
                                 <div class="code-outer">
                                     <p class="demos__item-code-inner code">
                                         <span class="code__keyword">const</span> 
                                         <span class="code__name">sliderDots</span> = 
                                         <span class="code__keyword">new</span> 
                                         <span class="code__name">Gallery</span>(
-                                        <span class="code__text">"#sliderSelector"</span>, { </br>
+                                        <span class="code__text">"#sliderSelector"</span>, { <br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">dots</span>: <span class="code__obj-boolean">true</span>,</br>
+                                        <span class="code__obj-key">dots</span>: <span class="code__obj-boolean">true</span>,<br>
                                         <span class="code__tab"></span>
-                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-number">20</span>,</br>
+                                        <span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-number">20</span>,<br>
                                         });
                                     </p>
                                 </div>
@@ -359,18 +352,19 @@
             <section class="get-it" id="getIt">
                 <div class="container">
                     <div class="get-it__inner">
-                        <div class="get-it__logo logo">
-                            <h2 class="get-it__logo-big logo__big">SliderLIB</h1>
+                        <div class="get-it__logo logo" aria-hidden="true">
+                            <h2 class="get-it__logo-big logo__big">SliderLIB</h2>
                             <p class="get-it__logo-small logo__small">DRAGGABLE & TOUCHABLE</p>
                         </div>
                         <div class="get-it__buttons">
                             <a class="get-it__button get-it__button-view-on-github" href="https://github.com/JSvadim/slider" target="_blank">
                                 View on github
                             </a>
-                            <button class="get-it__button get-it__button-hire">
-                                <span class="get-it__button-hire-text">HIRE page's author!</span>
+                            <div class="get-it__button get-it__button-hire">
+                                <span class="get-it__button-hire-text" id="forHireBtn">HIRE page's author!</span>
                                 <div class="get-it__button-hire-decor"></div>
-                            </button>
+                                <button class="get-it__button-hire-button" aria-labelledby="forHireBtn"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -388,27 +382,27 @@
                                 <div class="get-started__action-code-field">
                                     <div class="code-outer">
                                         <p class="code">
-                                            <span class="code__tag">&ltdiv</span>
+                                            <span class="code__tag">&lt;div</span>
                                             <span class="code__keyword">class</span> =
                                             <span class="code__text">"slider-selector"</span>
-                                            <span class="code__tag">&gt</span></br>
+                                            <span class="code__tag">&gt;</span><br>
                                                 <span class="code__tab"></span>    
-                                                <span class="code__tag">&ltdiv&gt</span>
+                                                <span class="code__tag">&lt;div&gt;</span>
                                                 slide
-                                                <span class="code__tag">&lt/div&gt</span></br>
+                                                <span class="code__tag">&lt;/div&gt;</span><br>
                                                 <span class="code__tab"></span>    
-                                                <span class="code__tag">&ltdiv&gt</span>
+                                                <span class="code__tag">&lt;div&gt;</span>
                                                 slide
-                                                <span class="code__tag">&lt/div&gt</span></br>
+                                                <span class="code__tag">&lt;/div&gt;</span><br>
                                                 <span class="code__tab"></span>    
-                                                <span class="code__tag">&ltdiv&gt</span>
+                                                <span class="code__tag">&lt;div&gt;</span>
                                                 slide
-                                                <span class="code__tag">&lt/div&gt</span></br>
+                                                <span class="code__tag">&lt;/div&gt;</span><br>
                                                 <span class="code__tab"></span>    
-                                                <span class="code__tag">&ltdiv&gt</span>
+                                                <span class="code__tag">&lt;div&gt;</span>
                                                 slide
-                                                <span class="code__tag">&lt/div&gt</span></br>
-                                            <span class="code__tag">&lt/div&gt</span>
+                                                <span class="code__tag">&lt;/div&gt;</span><br>
+                                            <span class="code__tag">&lt;/div&gt;</span>
                                         </p>
                                     </div>
                                 </div>
@@ -423,67 +417,67 @@
                                 <div class="get-started__action-code-field">
                                     <div class="code-outer">
                                         <p class="code">
-                                            <span class="code__tag">&lthead&gt</span></br>
+                                            <span class="code__tag">&lt;head&gt;</span><br>
                                                 <!-- tag start -->
                                                 <span class="code__tab"></span>
-                                                <span class="code__tag">&lttitle&gt</span>
+                                                <span class="code__tag">&lt;title&gt;</span>
                                                     Webpage name
-                                                <span class="code__tag">&lt/title&gt</span></br>
+                                                <span class="code__tag">&lt;/title&gt;</span><br>
                                                 <!-- tag end -->
 
                                                 <!-- tag start -->
                                                 <span class="code__tab"></span>
-                                                <span class="code__comment">&lt!-- at first add slider basic styles and js --!&gt</span></br>
+                                                <span class="code__comment">&lt;!-- at first add slider basic styles and js --!&gt;</span><br>
                                                 <!-- tag end -->
 
                                                 <!-- tag start -->
                                                 <span class="code__tab"></span>
-                                                <span class="code__tag">&ltlink</span> 
+                                                <span class="code__tag">&lt;link</span> 
                                                 <span class="code__keyword">rel</span> = 
                                                 <span class="code__text">"stylesheet"</span> 
                                                 <span class="code__keyword">type</span> = 
                                                 <span class="code__text">"text/css"</span> 
                                                 <span class="code__keyword">href</span> = 
                                                 <span class="code__text">"galleryLib.min.css"</span> 
-                                                <span class="code__tag">/&gt</span></br>
+                                                <span class="code__tag">/&gt;</span><br>
                                                 <!-- tag end -->
 
                                                 <!-- tag start -->
                                                 <span class="code__tab"></span>
-                                                <span class="code__tag">&ltlink</span> 
+                                                <span class="code__tag">&lt;link</span> 
                                                 <span class="code__keyword">rel</span> = 
                                                 <span class="code__text">"stylesheet"</span> 
                                                 <span class="code__keyword">type</span> = 
                                                 <span class="code__text">"text/css"</span> 
                                                 <span class="code__keyword">href</span> = 
                                                 <span class="code__text">"yourStyle.css"</span> 
-                                                <span class="code__tag">/&gt</span></br>
+                                                <span class="code__tag">/&gt;</span><br>
                                                 <!-- tag end -->
 
                                                 <!-- tag start -->
                                                 <span class="code__tab"></span>
-                                                <span class="code__tag">&ltscript</span> 
+                                                <span class="code__tag">&lt;script</span> 
                                                 <span class="code__keyword">defer</span> 
                                                 <span class="code__keyword">src</span> = 
                                                 <span class="code__text">"galleryLib.js"</span>
-                                                <span class="code__tag">&lt/script&gt</span></br>
+                                                <span class="code__tag">&lt;/script&gt;</span><br>
                                                 <!-- tag end -->
 
                                                 <!-- tag start -->
                                                 <span class="code__tab"></span>
-                                                <span class="code__comment">&lt!-- initialize slider in your script --!&gt</span></br>
+                                                <span class="code__comment">&lt;!-- initialize slider in your script --!&gt;</span><br>
                                                 <!-- tag end -->
 
                                                 <!-- tag start -->
                                                 <span class="code__tab"></span>
-                                                <span class="code__tag">&ltscript</span> 
+                                                <span class="code__tag">&lt;script</span> 
                                                 <span class="code__keyword">defer</span> 
                                                 <span class="code__keyword">src</span> = 
                                                 <span class="code__text">"yourScript.js"</span>
-                                                <span class="code__tag">&lt/script&gt</span></br>
+                                                <span class="code__tag">&lt;/script&gt;</span><br>
                                                 <!-- tag end -->
 
-                                            <span class="code__tag">&lt/head&gt</span>
+                                            <span class="code__tag">&lt;/head&gt;</span>
                                         </p>
                                     </div>
                                 </div>
@@ -499,15 +493,15 @@
                                     <div class="code-outer">
                                         <p class="code">
                                             <!-- tag start -->
-                                            <span class="code__comment">&lt!-- in your script file --!&gt</span></br>
+                                            <span class="code__comment">&lt;!-- in your script file --!&gt;</span><br>
                                             <!-- tag end -->
                                             <span class="code__keyword">const</span> 
                                             <span class="code__name">slider</span> = 
                                             <span class="code__keyword">new</span> 
                                             <span class="code__name">Gallery</span>(
-                                            <span class="code__text">".slider-selector"</span>, { </br>
-                                            <span class="code__tab"></span><span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-val">20</span>,</br>
-                                            <span class="code__tab"></span><span class="code__obj-key">arrows</span>: <span class="code__obj-val">true</span>,</br>
+                                            <span class="code__text">".slider-selector"</span>, { <br>
+                                            <span class="code__tab"></span><span class="code__obj-key">spaceBetweenSlides</span>: <span class="code__obj-val">20</span>,<br>
+                                            <span class="code__tab"></span><span class="code__obj-key">arrows</span>: <span class="code__obj-val">true</span>,<br>
                                             });
                                         </p>
                                     </div>
@@ -523,31 +517,31 @@
                                 <div class="get-started__action-code-field">
                                     <div class="code-outer">
                                         <p class="code">
-                                            <span class="code__comment">&lt!-- If you are about to use dots or arrows --!&gt</span></br>
-                                            <span class="code__comment">&lt!-- You should to style them since they almost don't have styles --!&gt</span></br>
-                                            </br>
-                                            Arrows classes:</br>
-                                            <span class="code__tab"></span>gallery-arrows</br>
-                                            <span class="code__tab"></span>gallery-arrow</br>
-                                            <span class="code__tab"></span>gallery-arrow-prev</br>
-                                            <span class="code__tab"></span>gallery-arrow-next</br>
+                                            <span class="code__comment">&lt;!-- If you are about to use dots or arrows --!&gt;</span><br>
+                                            <span class="code__comment">&lt;!-- You should to style them since they almost don't have styles --!&gt;</span><br>
+                                            <br>
+                                            Arrows classes:<br>
+                                            <span class="code__tab"></span>gallery-arrows<br>
+                                            <span class="code__tab"></span>gallery-arrow<br>
+                                            <span class="code__tab"></span>gallery-arrow-prev<br>
+                                            <span class="code__tab"></span>gallery-arrow-next<br>
 
                                             <span class="code__tab"></span>gallery-arrow-clicked
-                                            <span class="code__comment">&lt!-- this class adds to arrow after</span></br>
+                                            <span class="code__comment">&lt;!-- this class adds to arrow after</span><br>
                                             <span class="code__tab"></span><span class="code__tab"></span>
-                                            <span class="code__comment">you click it, and removes after slide changed.</span></br>
+                                            <span class="code__comment">you click it, and removes after slide changed.</span><br>
                                             <span class="code__tab"></span><span class="code__tab"></span>
-                                            <span class="code__comment">Use it to add animations to arrow --!&gt</span></br>
+                                            <span class="code__comment">Use it to add animations to arrow --!&gt;</span><br>
                                             
                                             <span class="code__tab"></span>gallery-arrow-disabled 
-                                            <span class="code__comment">&lt!-- this class adds to arrow-next</span></br>
+                                            <span class="code__comment">&lt;!-- this class adds to arrow-next</span><br>
                                             <span class="code__tab"></span><span class="code__tab"></span>
-                                            <span class="code__comment">if it's the last slide and to arrow-prev if it's the first one --!&gt</span></br>
-                                            </br>
-                                            Dots classes:</br>
-                                            <span class="code__tab"></span>gallery-dots</br>
-                                            <span class="code__tab"></span>gallery-dot</br>
-                                            <span class="code__tab"></span>gallery-dot-active</br>
+                                            <span class="code__comment">if it's the last slide and to arrow-prev if it's the first one --!&gt;</span><br>
+                                            <br>
+                                            Dots classes:<br>
+                                            <span class="code__tab"></span>gallery-dots<br>
+                                            <span class="code__tab"></span>gallery-dot<br>
+                                            <span class="code__tab"></span>gallery-dot-active<br>
                                         </p>
                                     </div>
                                 </div>

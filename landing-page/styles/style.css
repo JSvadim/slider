@@ -201,6 +201,15 @@ body.lock {
   transition: all 0.5s;
 }
 
+.gallery-dot:focus-visible,
+.gallery-arrow:focus-visible {
+  outline: 5px solid var(--orange);
+}
+
+.gallery-slide:focus-visible {
+  border: 3px solid var(--orange);
+}
+
 .logo__big {
   font-family: "Redressed";
 }
@@ -298,10 +307,10 @@ body.lock {
 .header__menu-link {
   color: var(--orange);
   font-size: 22px;
-  transition: all 0.3s;
+  transition: all 0.5s;
   display: inline-block;
 }
-.header__menu-link:hover {
+.header__menu-link:hover, .header__menu-link:focus-visible {
   color: var(--blue);
   transform: scale(1.05);
 }
@@ -337,6 +346,9 @@ body.lock {
   height: 100%;
   font-size: 0;
   color: rgba(255, 255, 255, 0);
+}
+.header__burger-btn:focus-visible {
+  outline: 5px solid var(--blue);
 }
 .header.burger-active .header__menu {
   transform: translate(0, 0);
@@ -499,9 +511,10 @@ body.lock {
 .first-screen__top-slider-decor-inside-pic {
   position: relative;
   z-index: 3;
-  width: auto;
+  width: 27.2px;
   height: 32px;
   transform: translateY(-2px);
+  background: url("../img/icons/touch.svg") 0 0/100% 100%;
   -webkit-animation: "slider-decor-pic" 10s infinite;
           animation: "slider-decor-pic" 10s infinite;
 }
@@ -511,6 +524,7 @@ body.lock {
   top: 24px;
   width: 26px;
   height: 30px;
+  background: url("../img/icons/touch-with-line.svg") 0 0/100% 100%;
 }
 .first-screen__top-slider-decor-outside-drag {
   position: absolute;
@@ -518,6 +532,7 @@ body.lock {
   bottom: -59px;
   width: 45px;
   height: 45px;
+  background: url("../img/icons/click.svg") 0 0/100% 100%;
 }
 .first-screen__bottom-slider {
   display: none;
@@ -656,7 +671,7 @@ body.lock {
   padding: 3px;
   margin: 0 auto 31px auto;
   position: relative;
-  background-color: white;
+  background-color: var(--textCol);
 }
 .demos__item-slider .gallery-wrapper {
   width: 100%;
@@ -865,12 +880,16 @@ body.lock {
   background-color: var(--blue);
   box-shadow: 0px 4px 4px #04bbf37c;
 }
+.get-it__button-view-on-github:focus-visible {
+  outline: 5px solid var(--orange);
+}
 .get-it__button-hire {
   color: var(--textCol);
   background-color: var(--blue);
   border: 2px solid transparent;
   display: inline-flex;
   align-items: center;
+  position: relative;
 }
 .get-it__button-hire-decor {
   width: 28px;
@@ -879,6 +898,18 @@ body.lock {
   margin: 0 0 0 24px;
   background: url("../img/icons/hire-btn.svg") 0 0/100% 100%;
   transition: all 0.5s;
+}
+.get-it__button-hire-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  transition: outline 0.5s;
+}
+.get-it__button-hire-button:focus-visible {
+  outline: 5px solid var(--orange);
 }
 .get-it__button-hire:hover {
   border: 2px solid var(--textCol);
@@ -1227,6 +1258,7 @@ body.lock {
             animation: "slider-decor--laptop" 10s infinite;
   }
   .first-screen__top-slider-decor-inside-pic {
+    width: 43px;
     height: 50.48px;
   }
   .first-screen__top-slider-decor-outside-touch {
@@ -1237,7 +1269,7 @@ body.lock {
     bottom: 21px;
   }
   .first-screen__top-slider-decor-outside-drag {
-    width: auto;
+    width: 66px;
     height: 66px;
     bottom: -65px;
   }
@@ -1254,6 +1286,10 @@ body.lock {
     background: rgba(255, 255, 255, 0.5);
     margin: 0 0 12px 0;
     position: relative;
+  }
+  .first-screen__bottom-slider-img {
+    height: 100%;
+    background: url("../img/fake-sliders-pics/second__first.png") 0 0/100% 100% no-repeat;
   }
   .first-screen__bottom-slider-title {
     font-family: "Montserrat-Medium";

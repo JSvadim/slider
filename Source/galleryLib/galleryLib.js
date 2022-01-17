@@ -306,18 +306,6 @@ class Gallery {
         const isFirstSlide = this.currentSlide === 0;
         this[nextArrowName].setAttribute('aria-label', 'next slide');
         this[prevArrowName].setAttribute('aria-label', 'previous slide');
-        /* this[nextArrowName].classList.remove(disabledArrowName);
-        this[prevArrowName].classList.remove(disabledArrowName);
-        this[nextArrowName].removeAttribute('disabled');
-        this[prevArrowName].removeAttribute('disabled');
-        if(isLastSlide) {
-            this[nextArrowName].setAttribute('disabled', '');
-            return this[nextArrowName].classList.add(disabledArrowName);
-        }
-        if(isFirstSlide) {
-            this[prevArrowName].setAttribute('disabled', '');
-            this[prevArrowName].classList.add(disabledArrowName);
-        } */
         if(isLastSlide) {
             return this[nextArrowName].setAttribute('aria-label', 'next slide. It is the last slide')
         }
@@ -394,8 +382,12 @@ class Gallery {
     }
 
     setSlidesTabIndex(firstCall = false) {
-        this.slideNodes.forEach(el => el.removeAttribute('tabindex'));
+        this.slideNodes.forEach(el => {
+            el.removeAttribute('tabindex');
+            el.setAttribute('aria-hidden', 'true');
+        });
         this.slideNodes[this.currentSlide].setAttribute('tabindex', '0');
+        this.slideNodes[this.currentSlide].setAttribute('aria-hidden', 'false');
         if(!firstCall) {
             this.screenReaderTellsActiveSlideContent()
         }
